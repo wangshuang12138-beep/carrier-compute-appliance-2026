@@ -14,63 +14,59 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#d8d8de;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink);
   display:flex;justify-content:center;padding:24px}
-.slide{width:1280px;height:720px;background:var(--paper);box-shadow:0 8px 40px rgba(0,0,0,.18);padding:38px 56px 24px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.slide{width:1280px;height:720px;background:var(--paper);box-shadow:0 8px 40px rgba(0,0,0,.18);padding:40px 56px 26px;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .slide::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--blue)}
 sup.ref{font-family:var(--mono);font-size:8px;color:var(--blue);font-weight:700;margin-left:1px;vertical-align:super;line-height:0}
 
 /* header */
-.hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.hd .l .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--blue);margin-bottom:7px}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.hd .l .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--blue);margin-bottom:8px}
 .hd h1{font-size:26px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
 .hd h1 span{color:var(--blue)}
-.hd .r{text-align:right;font-size:11px;color:var(--dim);line-height:1.75;font-family:var(--mono);padding-top:4px}
+.hd .r{text-align:right;font-size:10.5px;color:var(--dim);line-height:1.8;font-family:var(--mono);padding-top:6px}
 .hd .r b{color:var(--sub);font-weight:600}
 
 /* takeaway — 观点 */
-.take{font-size:13.5px;line-height:1.5;color:var(--sub);background:var(--panel);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:8px 16px;margin-bottom:12px}
+.take{font-size:14px;line-height:1.55;color:var(--sub);background:var(--panel);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:9px 16px;margin-bottom:13px}
 .take b{color:var(--ink)}
 
 /* KPI row */
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px}
-.kpi{border:1px solid var(--line);border-radius:12px;padding:12px 18px 10px;position:relative;background:#fff}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:12px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:15px 18px 13px;position:relative;background:#fff}
 .kpi::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:var(--kc,var(--blue))}
-.kpi .n{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi .n{font-size:33px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .kpi .n small{font-size:13.5px;font-weight:600;color:var(--sub);margin-left:3px}
-.kpi .t{font-size:12px;color:var(--sub);margin-top:3px}
-.kpi .s{font-size:9.5px;color:var(--dim);font-family:var(--mono);margin-top:5px}
-
-.bgline{font-size:10.5px;color:var(--dim);font-family:var(--mono);margin-bottom:10px}
-.bgline b{color:var(--sub);font-weight:600}
+.kpi .t{font-size:12.5px;color:var(--sub);margin-top:5px}
 
 /* main */
 .main{display:grid;grid-template-columns:1fr 370px;gap:22px;flex:1;min-height:0}
-.panel-h{font-size:14.5px;font-weight:750;margin-bottom:2px}
-.panel-cap{font-size:10px;color:var(--dim);font-family:var(--mono);margin-bottom:9px}
+.col{display:flex;flex-direction:column;min-height:0}
+.panel-h{font-size:16px;font-weight:750;margin-bottom:10px}
 
 /* three forms */
-.forms{display:flex;flex-direction:column;gap:9px}
-.form{border:1px solid var(--line);border-radius:12px;padding:11px 18px;background:var(--panel)}
-.form .h{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:750}
+.forms{display:flex;flex-direction:column;gap:12px;flex:1}
+.form{border:1px solid var(--line);border-radius:12px;padding:15px 20px;background:var(--panel);display:flex;flex-direction:column;justify-content:center;flex:1}
+.form .h{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:750}
 .form .h .d{width:9px;height:9px;border-radius:2px;flex:none}
-.form .h .m{margin-left:auto;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
-.form p{font-size:12px;color:var(--sub);line-height:1.55;margin-top:4px}
+.form .h .m{margin-left:auto;font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums}
+.form p{font-size:13px;color:var(--sub);line-height:1.55;margin-top:5px}
 .form p b{color:var(--ink)}
 
 /* insights */
-.ins{display:flex;flex-direction:column;gap:7px}
-.ins .it{flex:1;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:9px 12px;background:#fff}
-.ins .it .no{font-family:var(--mono);font-size:9px;color:var(--blue);letter-spacing:.15em;margin-bottom:2px}
-.ins .it h4{font-size:13px;font-weight:750;margin-bottom:2px}
-.ins .it p{font-size:11.2px;color:var(--sub);line-height:1.5}
+.ins{display:flex;flex-direction:column;gap:8px;flex:1}
+.ins .it{flex:1;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:10px 14px;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.ins .it .no{font-family:var(--mono);font-size:9px;color:var(--blue);letter-spacing:.15em;margin-bottom:3px}
+.ins .it h4{font-size:14px;font-weight:750;margin-bottom:4px}
+.ins .it p{font-size:12.5px;color:var(--sub);line-height:1.55}
 .ins .it p b{color:var(--ink)}
 .ins .it.gold{border-left-color:var(--amber)}
 .ins .it.gold .no{color:var(--amber)}
 
 /* footer */
-.ft{flex:none;margin-top:12px;padding-top:7px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;font-size:9.5px;color:var(--dim);font-family:var(--mono)}
+.ft{flex:none;margin-top:14px;padding-top:8px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;font-size:9.5px;color:var(--dim);font-family:var(--mono)}
 .ft .l{flex:1;line-height:1.6}
 .ft .cal{color:var(--sub)}
-.ft .srcs{font-size:8.5px;margin-top:2px}
+.ft .srcs{font-size:8.5px;margin-top:3px}
 .ft .srcs b{color:var(--blue);font-weight:700}
 .ft .pg{font-size:10.5px;letter-spacing:.1em;flex:none;padding-top:2px}
 
@@ -90,52 +86,44 @@ sup.ref{font-family:var(--mono);font-size:8px;color:var(--blue);font-weight:700;
       <h1>2026 运营商<span>算力一体机</span>：从试点走向规模集采元年</h1>
     </div>
     <div class="r">
-      <div>数据窗口 <b>2025-07 → 2026-11</b></div>
-      <div>口径 <b>公开招标 / 中标公示</b></div>
-      <div>编制 <b>2026-11-11</b></div>
-      <div>角标 <b>蓝色数字 ⇢ 页脚证据编号</b></div>
+      <div>数据窗口 <b>2025-07 → 2026-11</b> · 编制 <b>2026-11-11</b></div>
+      <div>口径 <b>公开招标 / 中标公示</b> · 角标 <b>蓝色数字 ⇢ 页脚证据编号</b></div>
     </div>
   </div>
 
-  <div class="take">三家已走出三条被总部验证的路——电信把算力卖成「宽带套餐」、移动用超节点锁死训练、联通轻资产押边缘。<b>7B/14B 本地推理是空档，集采窗口 12-18 个月。</b></div>
+  <div class="take">算力资本开支 移动 378 亿(+62%)、电信 255 亿(+26%)、联通 &gt;100 亿(+35%)<sup class="ref">9,10</sup>——钱在往算力搬；<b>7B/14B 本地推理是空档，集采窗口 12-18 个月。</b></div>
 
   <div class="kpis">
     <div class="kpi" style="--kc:#1f5eff">
       <div class="n">157.58<small>亿元</small><sup class="ref">1</sup></div>
       <div class="t">2026 H1 三家智算招标总预算</div>
-      <div class="s">移动 92.56 + 电信 34.03 + 联通 ≈31(推算) · 32 个项目<sup class="ref">1</sup></div>
     </div>
     <div class="kpi" style="--kc:#0e9384">
       <div class="n">3.3<small>万台</small><sup class="ref">19,13,14,2,3</sup></div>
-      <div class="t">电信全光组网接入算力一体机</div>
-      <div class="s">6 批 2024.6–2026.12（窗口内 3.2 万）· 单台限价 2.24–5.37 万<sup class="ref">3</sup></div>
+      <div class="t">电信全光组网接入算力一体机 · 6 批累计</div>
     </div>
     <div class="kpi" style="--kc:#1f5eff">
       <div class="n">≈150<small>亿元</small><sup class="ref">4,6,18</sup></div>
-      <div class="t">移动 AI 超节点集采（三批）</div>
-      <div class="s">30,528 卡 · 全昇腾 CANN · 新一代五家报价极差 &lt;1%<sup class="ref">18</sup></div>
+      <div class="t">移动 AI 超节点集采 · 三批 30,528 卡</div>
     </div>
   </div>
-
-  <div class="bgline">背景 · 2026 算力资本开支：<b>移动 378 亿(+62%)<sup class="ref">10</sup> · 电信 255 亿(+26%)<sup class="ref">10</sup> · 联通 &gt;100 亿(+35%)<sup class="ref">9</sup></b>　算力占总 capex 均超 30%（年报/业绩会口径）</div>
 
   <div class="main">
     <!-- LEFT: three forms -->
     <div class="col">
       <div class="panel-h">三种「一体机」形态：三家三条路</div>
-      <div class="panel-cap">同样叫一体机 · 本质是对 AI 时代身份的不同回答</div>
       <div class="forms">
         <div class="form">
-          <div class="h"><span class="d" style="background:var(--teal)"></span>中国电信 · 接入侧融合<span class="m">6 批 3.3 万台<sup class="ref">19,13,14,2,3</sup> · 已披露 ≈5.3 亿<sup class="ref">2,3</sup></span></div>
-          <p>FTTR-B + 通用服务器 + AI 算力卡打包，单台限价 2.24–5.37 万<sup class="ref">3</sup>，卖成「宽带套餐」进企业房间——<b>唯一破万的单品类</b>（对照：推理 7,499 台<sup class="ref">7,8</sup>）。</p>
+          <div class="h"><span class="d" style="background:var(--teal)"></span>中国电信 · 接入侧融合<span class="m">6 批 · ≈5.3 亿<sup class="ref">2,3</sup></span></div>
+          <p>FTTR-B+算力打包成「宽带套餐」进企业房间，单台限价 2.24–5.37 万<sup class="ref">3</sup>——<b>唯一破万的单品类</b>。</p>
         </div>
         <div class="form">
-          <div class="h"><span class="d" style="background:var(--blue)"></span>中国移动 · 中心侧超节点<span class="m">30,528 卡 · ≈150 亿<sup class="ref">4,6,18</sup></span></div>
-          <p>工厂预集成、整机柜交付，全昇腾 CANN<sup class="ref">4</sup>；新一代 20,480 卡五家报价 115.99–117.02 亿、极差不足 1%<sup class="ref">18</sup>——<b>硬件差价趋零</b>。推理另采 7,499 台 / 50+ 亿<sup class="ref">7,8</sup>。</p>
+          <div class="h"><span class="d" style="background:var(--blue)"></span>中国移动 · 中心侧超节点<span class="m">全昇腾 · 推理另采 7,499 台<sup class="ref">4,7</sup></span></div>
+          <p>整机柜交付；新一代 20,480 卡五家报价极差 &lt;1%<sup class="ref">18</sup>——<b>硬件差价趋零</b>。</p>
         </div>
         <div class="form">
-          <div class="h"><span class="d" style="background:var(--amber)"></span>中国联通 · 边缘推理侧<span class="m">算力投资 &gt;100 亿<sup class="ref">9</sup></span></div>
-          <p>「AI 边缘一体机」入五大智算产品线<sup class="ref">12</sup>，无集团大单、省级分散落地；自研 OISA/GSE 互联 + 算网大脑调度，<b>走轻资产差异化</b><sup class="ref">10</sup>。</p>
+          <div class="h"><span class="d" style="background:var(--amber)"></span>中国联通 · 边缘推理侧<span class="m">省级分散 · 无集团大单</span></div>
+          <p>「AI 边缘一体机」入五大智算产品线<sup class="ref">12</sup>，自研 OISA/GSE 互联，<b>走轻资产差异化</b><sup class="ref">10</sup>。</p>
         </div>
       </div>
     </div>
@@ -143,22 +131,21 @@ sup.ref{font-family:var(--mono);font-size:8px;color:var(--blue);font-weight:700;
     <!-- RIGHT: three judgments -->
     <div class="col">
       <div class="panel-h">三个判断</div>
-      <div class="panel-cap">数据支撑 · 「研判」为我方观点</div>
       <div class="ins">
         <div class="it">
           <div class="no">INSIGHT 01</div>
           <h4>形态已被总部验证</h4>
-          <p><b>3.3 万台集团级集采</b><sup class="ref">19,2,3</sup> 说明「光接入+算力」在总部层面被接受——<b>不是我们教育市场，是市场已经在买</b>。</p>
+          <p>3.3 万台集团集采<sup class="ref">19,2,3</sup>——<b>市场已经在买</b>。</p>
         </div>
         <div class="it">
           <div class="no">INSIGHT 02</div>
           <h4>推理下沉是增量战场</h4>
-          <p>推理 7,499 台 / 50+ 亿<sup class="ref">7,8</sup>，已是仅次于超节点的第二大品类。<b>7B/14B 级本地推理是超节点与手机之间的空档</b>（研判）。</p>
+          <p>推理 50+ 亿<sup class="ref">7,8</sup> 成第二大品类，<b>7B/14B 是超节点与手机间的空档</b>（研判）。</p>
         </div>
         <div class="it gold">
           <div class="no">INSIGHT 03</div>
           <h4>窗口期 12-18 个月</h4>
-          <p>报价极差不足 1%<sup class="ref">18</sup>、硬件利润趋零，竞争转向<b>交付与生态适配</b>；电信二期合同至 2026 年底<sup class="ref">3</sup>，<b>下一批集采窗口就在眼前</b>。</p>
+          <p>报价极差 &lt;1%<sup class="ref">18</sup>，竞争转向<b>交付与生态适配</b>；电信二期合同至 2026 年底<sup class="ref">3</sup>。</p>
         </div>
       </div>
     </div>
@@ -166,8 +153,8 @@ sup.ref{font-family:var(--mono);font-size:8px;color:var(--blue);font-weight:700;
 
   <div class="ft">
     <div class="l">
-      <div class="cal">口径：招标预算(1) 与中标公示金额(2,3,4,6,7,8,18) 与资本开支(9,10) 不可互加；含税/不含税以原始报道为准，不做折算；联通 ≈31 亿为差额推算值。</div>
-      <div class="srcs"><b>证据</b>　1 通信产业报2026-07-15 · 2 C114 2025-12-23 · 3 搜狐2026-05-30 · 4 DoNews 2026-04-10 · 6 财新2026-08-29 · 7 C114 2025-08-19 · 8 新浪财经2026-01-27 · 9 证券日报2026-03-23 · 10 雪球2026-07-12 · 12 国资委2025-04-21 · 13 光纤在线2025-07-17 · 14 讯石2025-10-22 · 18 上证报/东方财富2026-10-29 · 19 C114 2024-06-28 ——全文链接见仓库 data.md（19 条）</div>
+      <div class="cal">口径：招标预算(1) 与中标金额(2,3,4,6,7,8,18) 与资本开支(9,10) 不可互加；含税/不含税以原始报道为准；联通份额为差额推算。</div>
+      <div class="srcs"><b>证据</b>　1 通信产业报2026-07-15 · 2 C114 2025-12-23 · 3 搜狐2026-05-30 · 4 DoNews 2026-04-10 · 6 财新2026-08-29 · 7 C114 2025-08-19 · 8 新浪财经2026-01-27 · 9 证券日报2026-03-23 · 10 雪球2026-07-12 · 12 国资委2025-04-21 · 13 光纤在线2025-07-17 · 14 讯石2025-10-22 · 18 上证报/东方财富2026-10-29 · 19 C114 2024-06-28 ——全文链接见 data.md</div>
     </div>
     <div class="pg">01 / 01</div>
   </div>
