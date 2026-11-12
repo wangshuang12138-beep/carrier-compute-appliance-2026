@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汇报页 V2 · 算力下沉：端侧AI的确定性落点</title>
+<style>
+:root{
+  --paper:#ffffff; --ink:#111118; --sub:#5a5a68; --dim:#9a9aa8;
+  --blue:#1f5eff; --teal:#0e9384; --amber:#b45309;
+  --line:#e6e6ec; --panel:#f7f7fa; --bluewash:#eef3ff;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#d8d8de;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink);
+  display:flex;justify-content:center;padding:24px}
+.slide{width:1280px;height:720px;background:var(--paper);box-shadow:0 8px 40px rgba(0,0,0,.18);padding:30px 48px 20px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.slide::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--blue)}
+sup.ref{font-family:var(--mono);font-size:8px;color:var(--blue);font-weight:700;margin-left:1px;vertical-align:super;line-height:0}
+
+/* header */
+.hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.hd .l .tag{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--blue);margin-bottom:5px}
+.hd h1{font-size:25px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.hd .r{text-align:right;font-size:10px;color:var(--dim);line-height:1.75;font-family:var(--mono);padding-top:4px}
+.hd .r b{color:var(--sub);font-weight:600}
+
+/* trend band — 全页唯一趋势结论 */
+.trend{display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:10px;padding:10px 18px;margin-bottom:12px}
+.trend .chip{flex:none;font-family:var(--mono);font-size:9px;letter-spacing:.18em;background:var(--blue);color:#fff;border-radius:4px;padding:3px 8px;font-weight:700}
+.trend p{font-size:14.5px;line-height:1.5}
+.trend b{color:#8fb0ff}
+.trend .hl{background:rgba(143,176,255,.16);padding:0 3px;border-radius:3px}
+.trend sup.ref{color:#8fb0ff}
+
+/* spectrum table */
+.spec{flex:none;margin-bottom:11px}
+.spec-h{font-size:15px;font-weight:750;margin-bottom:7px;display:flex;align-items:baseline;gap:10px}
+.spec-h .note{font-size:10.5px;color:var(--dim);font-weight:500}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:5.5px 12px;text-align:left;vertical-align:middle}
+thead th{font-size:11px;letter-spacing:.02em;color:var(--sub);border-bottom:2px solid var(--ink);padding-bottom:6px}
+thead th .pos{font-size:12.5px;font-weight:800;color:var(--ink);display:block;margin-bottom:1px}
+thead th.edge{color:var(--sub)}
+thead th.edge .pos{color:var(--blue)}
+tbody th{font-weight:600;color:var(--sub);font-size:11px;white-space:nowrap;width:118px;padding-left:2px}
+tbody td{border-bottom:1px solid var(--line);color:var(--ink)}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:none}
+td .big{font-size:15.5px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+td .unit{font-size:10.5px;color:var(--sub);font-weight:600;margin-left:2px}
+td.edge{background:var(--bluewash);font-weight:650}
+td.edge .big{color:var(--blue)}
+tbody th.edge-l{color:var(--blue)}
+.num{font-variant-numeric:tabular-nums}
+.dim{color:var(--sub);font-weight:500;font-size:11px}
+.tcap{font-size:10.5px;color:var(--dim);margin-top:5px;padding-left:2px}
+.tcap b{color:var(--sub);font-weight:650}
+
+/* bottom split */
+.bot{display:grid;grid-template-columns:1fr 400px;gap:18px;flex:1;min-height:0}
+.col-h{font-size:13px;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.col-h .lab{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;padding:2px 7px;border-radius:3px;font-weight:700}
+.col-h .lab.fact{background:#e8eeff;color:var(--blue)}
+.col-h .lab.judge{background:#fdf0e2;color:var(--amber)}
+
+/* facts */
+.facts{display:flex;flex-direction:column;gap:5.5px;min-height:0}
+.fact{flex:1;display:flex;align-items:baseline;gap:9px;border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff;font-size:12px;line-height:1.45}
+.fact .fn{flex:none;font-family:var(--mono);font-size:9px;color:var(--blue);font-weight:800;letter-spacing:.08em}
+.fact b{font-weight:750}
+.fact .num{font-weight:750}
+
+/* judgments */
+.judges{display:flex;flex-direction:column;gap:5.5px;min-height:0}
+.judge{flex:1;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:8px;padding:6px 12px;background:#fff}
+.judge h4{font-size:12.5px;font-weight:800;margin-bottom:2px;color:var(--ink)}
+.judge h4 .n{font-family:var(--mono);font-size:9px;color:var(--amber);letter-spacing:.08em;margin-right:5px}
+.judge p{font-size:11.5px;color:var(--sub);line-height:1.45}
+.judge p b{color:var(--ink);font-weight:700}
+
+/* footer */
+.ft{flex:none;margin-top:10px;padding-top:7px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;font-size:9px;color:var(--dim);font-family:var(--mono)}
+.ft .l{flex:1;line-height:1.55}
+.ft .cal{color:var(--sub)}
+.ft .srcs{margin-top:2px}
+.ft .srcs b{color:var(--blue);font-weight:700}
+.ft .pg{font-size:10px;letter-spacing:.1em;flex:none;padding-top:2px}
+
+@media print{
+  body{padding:0;background:#fff}
+  .slide{box-shadow:none;width:100%;height:auto;min-height:100vh}
+  @page{size:1280px 720px;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="hd">
+    <div class="l">
+      <div class="tag">WEEKLY BRIEFING · 算力市场情报 · V2</div>
+      <h1>算力正在向接入侧下沉：端侧AI 的确定性落点</h1>
+    </div>
+    <div class="r">
+      <div>数据窗口 <b>2025-07 → 2026-11</b> · 编制 <b>2026-11-12</b></div>
+      <div>口径 <b>公开招标 / 中标公示</b> · 角标 <b>蓝色数字 ⇢ 页脚证据编号</b></div>
+    </div>
+  </div>
+
+  <div class="trend">
+    <span class="chip">趋势</span>
+    <p>钱在往算力搬，但<b>结构比总量重要</b>：中心侧竞争已饱和（超节点 5 家报价极差 &lt;1%<sup class="ref">18</sup>），接入侧正万台级放量（6 批 3.3 万台、单台 1.7–2.8 万<sup class="ref">2,3,13,14,19</sup>）——<span class="hl"><b>端侧AI（7B/14B 本地推理）的确定性载体，是接入网算力一体机。</b></span></p>
+  </div>
+
+  <div class="spec">
+    <div class="spec-h">三种算力、三个位置、三种单价<span class="note">—— 同一口径对齐：规模 / 金额 / 单价 / 竞争态</span></div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:118px"></th>
+          <th><span class="pos">中心 · 超节点</span>训练 + 高密推理</th>
+          <th><span class="pos">中心 · 推理服务器</span>通用推理池</th>
+          <th class="edge"><span class="pos">接入侧 · 算力一体机</span>企业房间 · 接入网边缘</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>采购主体</th>
+          <td>中国移动 · 集团集采</td>
+          <td>中国移动 · 集团集采</td>
+          <td class="edge">中国电信 · 集团集采</td>
+        </tr>
+        <tr>
+          <th>累计规模</th>
+          <td><span class="big num">30,528</span><span class="unit">卡</span></td>
+          <td><span class="big num">7,499</span><span class="unit">台</span></td>
+          <td class="edge"><span class="big num">33,000</span><span class="unit">台</span></td>
+        </tr>
+        <tr>
+          <th>金额</th>
+          <td><span class="big num">≈150</span><span class="unit">亿元</span><span class="dim"> · 中标含税</span></td>
+          <td><span class="big num">&gt;50</span><span class="unit">亿元</span><span class="dim"> · 两轮合计</span></td>
+          <td class="edge"><span class="big num">≈5.3</span><span class="unit">亿元</span><span class="dim"> · 已披露中标</span></td>
+        </tr>
+        <tr>
+          <th>单价</th>
+          <td><span class="big num">33–57</span><span class="unit">万元/卡</span><span class="dim"> · 口径注④</span></td>
+          <td><span class="big num">≈67</span><span class="unit">万元/台</span><span class="dim"> · 按下限推算</span></td>
+          <td class="edge"><span class="big num">1.7–2.8</span><span class="unit">万元/台</span><span class="dim"> · 中标，限价至 5.37 万</span></td>
+        </tr>
+        <tr>
+          <th>竞争态</th>
+          <td>5 家分食 · 报价极差 &lt;1%<sup class="ref">18</sup></td>
+          <td>10 家 · 类CUDA / CANN 双生态<sup class="ref">7,8</sup></td>
+          <td class="edge">4 家分食 6 批 · 规格未锁定<sup class="ref">2,3</sup></td>
+        </tr>
+        <tr>
+          <th>当前节点</th>
+          <td>第三批公示 2026-10-28<sup class="ref">18</sup></td>
+          <td>一年期集采 2025-08 → 2026-01<sup class="ref">7,8</sup></td>
+          <td class="edge">二期合同至 2026-12-31<sup class="ref">3</sup></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tcap">联通已将「AI 边缘一体机」列入五大智算产品线<sup class="ref">12</sup>，尚无集团级集采——<b>接入侧集团集采目前仅电信一家，产品定义权仍开放。</b></div>
+  </div>
+
+  <div class="bot">
+    <!-- LEFT: facts -->
+    <div>
+      <div class="col-h">事实链<span class="lab fact">FACT · 全部公开有据</span></div>
+      <div class="facts">
+        <div class="fact"><span class="fn">F1</span><span>2026 H1 三家智算招标总盘 <b class="num">157.58 亿</b>：移动 <b class="num">92.56</b> / 电信 <b class="num">34.03</b> / 联通 <b class="num">≈31</b>（差额推算）<sup class="ref">1</sup></span></div>
+        <div class="fact"><span class="fn">F2</span><span>2026 算力资本开支：移动 <b class="num">378 亿</b>(<b class="num">+62%</b>) · 电信 <b class="num">255 亿</b>(<b class="num">+26%</b>) · 联通 <b class="num">&gt;100 亿</b>(<b class="num">35%</b>)，占比均超 30%<sup class="ref">9,10</sup></span></div>
+        <div class="fact"><span class="fn">F3</span><span>移动超节点三批 <b class="num">30,528 卡</b> / <b class="num">≈150 亿</b>，100% 昇腾 CANN；第二批 <b>五家报价极差 &lt;1%</b><sup class="ref">4,6,18</sup></span></div>
+        <div class="fact"><span class="fn">F4</span><span>推理需求独立成类：推理服务器 <b class="num">7,499 台</b> / <b class="num">&gt;50 亿</b>，成为超节点之后第二大采购品类<sup class="ref">7,8</sup></span></div>
+        <div class="fact"><span class="fn">F5</span><span>电信接入算力一体机 6 批 <b class="num">3.3 万台</b>，单批峰值 <b class="num">1.5 万台</b>，中标单价 <b class="num">1.74–2.83 万/台</b>（不含税）<sup class="ref">2,3,13,14,19</sup></span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: judgments -->
+    <div>
+      <div class="col-h">端侧AI 的三个确定性<span class="lab judge">研判 · 由 F1–F5 推出</span></div>
+      <div class="judges">
+        <div class="judge">
+          <h4><span class="n">J1</span>形态确定：按「FTTx + 算力模块」定义产品</h4>
+          <p>接入侧是唯一被集团集采验证的端侧形态（F5），无需另造品类。</p>
+        </div>
+        <div class="judge">
+          <h4><span class="n">J2</span>价格确定：单台 2–3 万是成本落点</h4>
+          <p>中标价带 1.7–2.8 万、限价上限 5.37 万<sup class="ref">3</sup>，与中心侧差近两个数量级——拼场景与交付，不拼堆料。</p>
+        </div>
+        <div class="judge">
+          <h4><span class="n">J3</span>时间确定：下一个卡位节点已知</h4>
+          <p>电信二期合同至 2026-12-31<sup class="ref">3</sup>，下一年度集采计划即端侧AI的入场窗口。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft">
+    <div class="l">
+      <div class="cal">口径：①招标预算(1) ②中标金额(2,3,7,8,18) ③资本开支(9,10) 不可互加；含税/不含税以原始报道为准，不折算；联通份额为差额推算。④第三批超节点含 RoCE 交换机 448 台 + 存储 82 套，单卡价与裸机口径不同。</div>
+      <div class="srcs"><b>证据</b>　1 通信产业报2026-07-15 · 2 C114 2025-12-23 · 3 搜狐/C114 2026-05-30 · 4 DoNews 2026-04-10 · 6 财新2026-08-29 · 7 C114 2025-08-19 · 8 新浪财经2026-01-27 · 9 证券日报2026-03-23 · 10 雪球2026-07-12 · 12 国资委2025-04-21 · 13 光纤在线2025-07-17 · 14 讯石2025-10-22 · 18 上证报/东财2026-10-29 · 19 C114 2024-06-28 ——全文链接见 data.md</div>
+    </div>
+    <div class="pg">02 / 02 · V2</div>
+  </div>
+
+</div>
+</body>
+</html>
