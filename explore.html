@@ -3,107 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>运营商自研一体机 · 交互图鉴</title>
-<meta name="description" content="三家运营商 20 款自研一体机交互图谱：悬停展开详情，关键词高亮场景机型。">
+<title>运营商自研一体机 · 三盒合辑</title>
+<meta name="description" content="二十款运营商自研一体机，按层级三盒装：集采层、云品牌层、场景层。悬停逐层展开。">
 <style>
-/* 设计参考：Linear 官网的克制排版 + framer-motion 弹簧物理（cubic-bezier(.22,1,.36,1)） */
+/* 设计参考：Dieter Rams「少，却更好」× Linear 的弹簧动效。默认态只露名字，信息跟着鼠标走。 */
 :root{
-  --accent:#2456d8;--ink:#16181d;--mut:#6b7280;--line:#e8e9ec;--card:#fff;
+  --accent:#2456d8;--ink:#16181d;--mut:#6b7280;--line:#e8e9ec;
   --ct:#2456d8;--cm:#0f9d58;--cu:#d92b2b;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#fafbfc;color:var(--ink);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1180px;margin:0 auto;padding:52px 30px 70px}
+.wrap{max-width:1120px;margin:0 auto;padding:64px 30px 70px}
 
 .kicker{font-size:11px;letter-spacing:.2em;color:var(--mut);text-transform:uppercase}
-h1{font-size:32px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px}
 .hmeta{font-size:13px;color:var(--mut)}
 .hmeta b{color:var(--ink);font-weight:600}
+.hmeta a{color:var(--accent);text-decoration:none;border-bottom:1px dotted rgba(36,86,216,.4)}
 
-/* 过滤 */
-.filters{display:flex;gap:8px;margin:26px 0 20px;flex-wrap:wrap}
-.fpill{font-family:inherit;font-size:12.5px;padding:6px 14px;border-radius:20px;border:1px solid var(--line);background:#fff;color:#3c4149;cursor:pointer;transition:border-color .25s,color .25s,background .25s}
-.fpill .n{color:var(--mut);margin-left:4px;font-size:11px}
-.fpill:hover{border-color:#c9d4f2}
-.fpill.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.fpill.on .n{color:#9aa3b2}
+/* ── 三盒合辑 ── */
+.cols{display:flex;gap:16px;align-items:flex-start;margin-top:36px}
+.col{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px 24px;cursor:default;position:relative;animation:rise .6s var(--ease) both;animation-delay:var(--d,0s);transition:flex .55s var(--ease),box-shadow .4s,border-color .4s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.col:nth-child(2){--d:.08s}.col:nth-child(3){--d:.16s}
+.col:hover,.col.open{flex:1.85;box-shadow:0 20px 54px rgba(20,30,60,.10);border-color:#c9d4f2;z-index:5}
 
-/* 卡片墙 */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;cursor:default;animation:rise .6s var(--ease) both;animation-delay:var(--d,0s);transition:transform .38s var(--ease),box-shadow .38s,border-color .38s;outline:none}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.card:hover,.card:focus-within{transform:translateY(-5px);box-shadow:0 12px 32px rgba(20,30,60,.10);border-color:#c9d4f2;z-index:30}
-.card.hide{display:none}
-.card.dim{opacity:.32;filter:saturate(.4);transition:opacity .3s,filter .3s}
-.card.hl{border-color:var(--accent);box-shadow:0 0 0 3px rgba(36,86,216,.16),0 12px 32px rgba(20,30,60,.10)}
-.card.hot{border-color:#b9c9f2;background:#f6f9ff}
-.card.hot:hover{border-color:var(--accent)}
+.col .num{font-size:13px;font-weight:700;color:#b6bfd2;letter-spacing:.08em}
+.col h2{font-size:18px;font-weight:800;margin:8px 0 6px}
+.col .cnt{display:inline-block;font-size:11.5px;color:var(--accent);background:#eef3ff;border-radius:20px;padding:2px 10px;font-weight:600}
+.col .ess{font-size:12.5px;color:var(--mut);line-height:1.65;margin-top:10px}
+.col .hint{font-size:11px;color:#b6bfd2;margin-top:16px;transition:opacity .3s}
+.col:hover .hint,.col.open .hint{opacity:0}
 
-.top{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mut)}
+.list{max-height:0;opacity:0;overflow:hidden;transition:max-height .65s var(--ease),opacity .3s ease .12s,margin-top .4s}
+.col:hover .list,.col.open .list{max-height:960px;opacity:1;margin-top:16px}
+
+.it{padding:7px 9px;border-radius:10px;transition:background .25s,opacity .3s,box-shadow .25s;cursor:default}
+.it:hover{background:#f5f7fc}
+.it .row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:650;line-height:1.45}
 .dot{width:7px;height:7px;border-radius:50%;flex:none}
-.op[data-op="电信"] .dot{background:var(--ct)}.op[data-op="移动"] .dot{background:var(--cm)}.op[data-op="联通"] .dot{background:var(--cu)}
-.top .bdg{margin-left:auto}
-.bdg{font-size:10.5px;padding:2px 8px;border-radius:20px;white-space:nowrap}
-.b-lc{background:#eef3ff;color:var(--accent)}
-.b-cl{background:#f0eefc;color:#5b4bc4}
-.b-sc{background:#fff4e5;color:#b5730f}
-.b-os{background:#e8f6f0;color:#1e7f4f}
+.op-电信{background:var(--ct)}.op-移动{background:var(--cm)}.op-联通{background:var(--cu)}
+.it .fact{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s var(--ease),opacity .3s ease .08s,margin-top .35s;font-size:12px;color:#5a6068;line-height:1.65;padding-left:15px}
+.it:hover .fact,.it.open .fact{max-height:130px;opacity:1;margin-top:5px}
+.it .fact b{color:var(--ink);font-weight:650}
+.it .rf{color:var(--accent);font-weight:600;font-size:11px}
+.it .rf .weak{color:#b5730f}
+.it.dim{opacity:.3}
+.it.hl{background:#eef3ff;box-shadow:inset 0 0 0 1.5px var(--accent)}
 
-.card h3{font-size:14.5px;font-weight:700;line-height:1.5;margin:9px 0 5px}
-.tag{font-size:12.5px;color:var(--mut);line-height:1.55}
-.tag b{color:var(--ink);font-weight:650}
-
-/* 悬停详情面板：absolute 弹出，不扰动网格 */
-.panel{position:absolute;left:8px;right:8px;top:calc(100% - 8px);background:#fff;border:1px solid #e8eaf0;border-radius:14px;box-shadow:0 26px 60px rgba(20,30,60,.18);padding:0 16px;max-height:0;overflow:hidden;opacity:0;transform:translateY(8px) scale(.985);transform-origin:top center;pointer-events:none;transition:max-height .45s var(--ease),opacity .28s ease,transform .45s var(--ease),padding .45s var(--ease);z-index:40}
-.card:hover .panel,.card.open .panel{max-height:520px;opacity:1;transform:none;padding:14px 16px 13px;pointer-events:auto}
-.panel li{font-size:12.5px;color:#3c4149;line-height:1.65;padding-left:12px;position:relative;margin:4px 0}
-.panel li::before{content:"";position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.55}
-.panel .refs{margin-top:9px;padding-top:8px;border-top:1px dashed #eceef2;font-size:11px;color:var(--mut)}
-.panel .refs b{color:var(--accent);font-weight:600}
-.weak{color:#b5730f}
-
-/* 观点区 */
-.view{position:relative;margin-top:56px;background:var(--ink);color:#e8ebf0;border-radius:18px;padding:38px 44px}
+/* ── 观点 ── */
+.view{position:relative;margin-top:60px;background:var(--ink);color:#e8ebf0;border-radius:18px;padding:36px 42px}
 .view .vk{font-size:11px;letter-spacing:.2em;color:#8a93a5;text-transform:uppercase}
-.view p{font-size:19px;line-height:1.9;margin-top:14px;max-width:920px}
+.view p{font-size:19px;line-height:2;margin-top:14px;max-width:920px}
 .kp{font:inherit;font-size:15.5px;padding:2px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#cdd6ea;cursor:pointer;margin:0 2px;transition:all .25s var(--ease);vertical-align:2px}
 .kp:hover{border-color:#7ea2ff;color:#fff}
 .kp.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .view .vhint{font-size:12px;color:#8a93a5;margin-top:16px}
-.view .vsrc{font-size:11.5px;color:#677084;margin-top:22px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
+.view .vsrc{font-size:11.5px;color:#677084;margin-top:20px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
 
-.nav{margin-top:34px;font-size:13px;display:flex;gap:20px;flex-wrap:wrap}
+.nav{margin-top:32px;font-size:13px;display:flex;gap:20px;flex-wrap:wrap}
 .nav a{color:var(--accent);text-decoration:none;border-bottom:1px dotted rgba(36,86,216,.45)}
-.note{margin-top:18px;font-size:11.5px;color:#9aa3b2;line-height:1.7}
+.note{margin-top:16px;font-size:11.5px;color:#9aa3b2;line-height:1.7}
 
-@media(max-width:640px){
-  .cards{grid-template-columns:1fr 1fr}
+@media(max-width:860px){
+  .cols{flex-direction:column}
+  .col:hover{flex:1}
   .view{padding:28px 22px}
-  .view p{font-size:16.5px}
+  .view p{font-size:16px}
   h1{font-size:25px}
 }
-@media(max-width:440px){.cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="kicker">OPERATOR APPLIANCES · INTERACTIVE ATLAS</div>
-  <h1>运营商自研一体机 · 交互图鉴</h1>
+  <div class="kicker">OPERATOR APPLIANCES · THREE BOXES</div>
+  <h1>二十款一体机 · 三盒合辑</h1>
   <div class="hmeta">
-    <b>3</b> 家运营商 · <b>20</b> 款机型 · <b>鼠标悬停</b>或点按展开详情 ·
-    证据 <b>39</b> 条见 <a href="./lineage.html" style="color:var(--accent);border-bottom:1px dotted rgba(36,86,216,.4);text-decoration:none">lineage.html</a> · 编制 2026-11-12
+    <b>3</b> 家运营商 · <b>20</b> 款机型 · 按层级分装三盒 · <b>悬停</b>开盒、悬停条目看详情（触屏点按）·
+    证据 <b>39</b> 条见 <a href="./lineage.html">lineage.html</a> · 编制 2026-11-12
   </div>
 
-  <div class="filters" id="filters">
-    <button class="fpill on" data-f="all">全部<span class="n">20</span></button>
-    <button class="fpill" data-f="电信">中国电信<span class="n">7</span></button>
-    <button class="fpill" data-f="移动">中国移动<span class="n">6</span></button>
-    <button class="fpill" data-f="联通">中国联通<span class="n">7</span></button>
-  </div>
-
-  <div class="cards" id="grid"></div>
+  <div class="cols" id="cols"></div>
 
   <div class="view">
     <div class="vk">观点 · TAKE</div>
@@ -115,7 +97,7 @@ h1{font-size:32px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px}
       <button class="kp" data-tag="医疗">医疗</button>
       等场景 / 行业的机型。
     </p>
-    <div class="vhint">↑ 点击关键词，高亮上方对应机型；再点一次取消。</div>
+    <div class="vhint">↑ 点击关键词，开盒并高亮对应条目；再点一次取消。</div>
     <div class="vsrc">口径：以公开报道 / 官网产品页为准，数据窗口 2024-06 → 2026-11；机型与证据编号同 data.md 底稿，全文见 lineage.html。</div>
   </div>
 
@@ -124,184 +106,113 @@ h1{font-size:32px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px}
     <a href="./report-v2.html">汇报页 V2（1280×720）</a>
     <a href="./data.md">data.md 数据底稿</a>
   </div>
-  <div class="note">设计参考：Linear 官网的克制排版 × framer-motion 弹簧曲线。悬停浮起的是卡片，不动的是整张网格。</div>
+  <div class="note">设计参考：Dieter Rams「少，却更好」——默认态三盒卡片只露名字，信息跟着鼠标走，页面其余部分是留白。</div>
 
 </div>
 
 <script>
-const DATA = [
- {op:'电信',layer:'集采层',bdg:'b-lc',hot:true,tags:['接入网'],refs:'证据 1–4 · 13–15 · 19',
-  name:'全光组网接入算力一体机（FTTR-B）',
-  tag:'6 批 <b>3.3 万台</b>，唯一放量的集采品类——端侧AI 的对标所在',
-  more:['6 批累计 <b>3.3 万台</b>（2024-06 首批 1,000 台 → 2026-05 二期 9,000 台）',
-        '中标单价 <b>1.74 / 1.98 / 2.83 万</b>/台，最高限价 5.37 万',
-        '二期合同履行至 <b>2026-12-31</b>',
-        '中标厂商：华为、四川九州、依图、研扬等']},
- {op:'电信',layer:'云品牌层',bdg:'b-cl',tags:['通用智算'],refs:'证据 20–22 · 30',
-  name:'息壤智算一体机（DeepSeek 训推/推理版）',
-  tag:'天翼云旗舰，签约额已达 <b>6 亿</b>',
-  more:['2024-10-17 首发，昇腾 910B <b>8/16/32 卡</b>，推理/训推多版本',
-        '2026-04 新一代推理一体机（昇腾 800I A2/A3）',
-        '董事长业绩会披露：签约 <b>6 亿元</b>、商机 3000+、签约 500+',
-        'IDC 中国 AI 训推一体机评估 <b>五项满分</b>']},
- {op:'电信',layer:'云品牌层',bdg:'b-cl',tags:['语音'],refs:'证据 36',
-  name:'星辰语音大模型一体机',
-  tag:'"会说方言的小模型"，已进校园',
-  more:['亿级参数，嘈杂环境报警关键词识别',
-        '2024-05 落地某<b>小学防霸凌</b>场景',
-        '校园、园区等"人多的地方"是目标场景']},
- {op:'电信',layer:'云品牌层',bdg:'b-cl',tags:['视频'],refs:'证据 37',
-  name:'星辰视觉大模型一体机',
-  tag:'面向政法公安的视频图像解析',
-  more:['目标 / 动作 / 事件监测，非配合式人脸识别',
-        '面向<b>政法公安</b>，即开即用',
-        '天翼AI开放平台产品页在列']},
- {op:'电信',layer:'场景层',bdg:'b-sc',tags:['金融监管'],refs:'证据 23',
-  name:'星海御风 1 号 · 穿透式监管云一体机',
-  tag:'翼支付出品，整机交付、按年订购',
-  more:['2026-08 发布，整机交付上架即用，共三版本（产品页亦作"星辰御风 1 号"）',
-        '订购制按年付费，信创全链路',
-        '翼支付另有星海辰玑·财司核心平台、可信数据空间等产品族']},
- {op:'电信',layer:'场景层',bdg:'b-sc',tags:['医疗','视频'],refs:'证据 36 · 媒体口径',
-  name:'星辰数字人 / 智慧医疗行业一体机',
-  tag:'数字人 + 20+ 行业大模型',
-  more:['数字中国建设成果展 2024-05：可智能对话的数字人系统',
-        '星辰大模型一体机：视频接入、解析、管理一体',
-        '教育、政务、应急等 <b>20+ 行业大模型</b>（媒体报道口径）']},
- {op:'电信',layer:'云品牌层',bdg:'b-cl',tags:['云底座'],refs:'证据 38',
-  name:'天翼混合云一体机 iStack',
-  tag:'官网可下单的超融合云底座',
-  more:['2022-05 发布，服务器+交换机+机柜一体化交付',
-        '<b>3 节点起步</b>，官网选购下单、约一个月交付',
-        'x86 / 鲲鹏 / 飞腾 / 海光多芯',
-        '面向区县、医院、中小企业、边缘节点']},
- {op:'移动',layer:'云品牌层',bdg:'b-cl',tags:['边缘','云底座'],refs:'证据 32',
-  name:'边缘智能小站 EIS',
-  tag:'移动云边缘底座，3 节点起交付',
-  more:['EHCI 边缘超融合底座，<b>3 节点起</b>交付',
-        '数据不出场、超低时延，可信云轻量云最佳实践',
-        'IDC 2024H2 边缘云报告：移动云边缘云市场领先']},
- {op:'移动',layer:'云品牌层',bdg:'b-cl',tags:['通用智算'],refs:'证据 24–25 · 32',
-  name:'移动云智算一体机（EIS 底座）',
-  tag:'基于 EIS 打造的"小型专属云"',
-  more:['官方定义：基于移动云边缘智能小站算力底座打造的小型专属云',
-        'DeepSeek 版：国产 CPU/GPU 信创全栈、一云多芯',
-        '2025-04-11 云智算大会发布']},
- {op:'移动',layer:'云品牌层',bdg:'b-cl',tags:['医疗','视频'],refs:'证据 34–35',
-  name:'芯合一体机（山东移动）',
-  tag:'省公司自研，已发设备采购招标',
-  more:['自研异构超融合软件栈，已适配 <b>9 家国产芯片</b>',
-        '场景机四款：<b>文曲办公 · 华佗医疗 · 秦琼安防 · 包拯审计</b>',
-        '近 20 家行业客户，签约总额超 <b>2,000 万</b>（截至 2026-09）',
-        '2026-04 设备采购招标：92 套服务器 + <b>736 张加速卡</b>——省公司自研机也走集采']},
- {op:'移动',layer:'场景层',bdg:'b-sc',tags:['农业'],refs:'证据 33',
-  name:'万象耕耘农业大模型一体机',
-  tag:'九天底座，河南试点近 300 万亩',
-  more:['中移物联 2025-06 AI+物联网发布会推出',
-        '<b>4,000 万+</b>农业知识库',
-        '植物医院 / 种植仿真 / 数字农艺师',
-        '河南试点近 <b>300 万亩</b>']},
- {op:'移动',layer:'云品牌层',bdg:'b-cl',tags:['云底座'],refs:'证据 26',
-  name:'九天超融合信创一体机',
-  tag:'五维一体的信创底座',
-  more:['计算 / 存储 / AI / 网络 / 安全"五维一体"',
-        '超融合架构、开箱即用（2024-05/06）']},
- {op:'移动',layer:'出海',bdg:'b-os',tags:['金融监管','通用智算'],refs:'证据 25',
-  name:'中移国际 DeepSeek 一体机私有化',
-  tag:'亚太金融客户出海首单',
-  more:['2025-02-28 落地亚太金融客户（出海首单）',
-        '中移国际同时经营东南亚/欧洲运营商托管业务']},
- {op:'联通',layer:'云品牌层',bdg:'b-cl',tags:['通用智算'],refs:'证据 27',
-  name:'元景训推 / 推理一体机',
-  tag:'元景 MaaS 预置的 GPU 机型',
-  more:['2024-07-20 元景系列发布',
-        '与息壤、九天对位——运营商大模型一体机三品牌之一']},
- {op:'联通',layer:'场景层',bdg:'b-sc',tags:['视频'],refs:'证据 27',
-  name:'元景智能融合网关',
-  tag:'最接近"网关+AI"的自有形态',
-  more:['预置视频分析平台，算网融合网关形态',
-        '三家自有品牌中最接近高阶网关形态——<b>但未见集采放量</b>']},
- {op:'联通',layer:'云品牌层',bdg:'b-cl',tags:['通用智算'],refs:'证据 31 · 媒体报道',
-  name:'联通云智算一体机',
-  tag:'2025-07 六新品之一',
-  more:['联通云发布智算一体机等六新产品之一（2025-07-21）']},
- {op:'联通',layer:'场景层',bdg:'b-sc',tags:['边缘'],refs:'证据 39',
-  name:'EdgePOD 5G MEC 边缘云一体机',
-  tag:'2020 年即商用的边缘机柜',
-  more:['"即插即用"边缘一体化机柜：网络分流 + 云 IaaS + 增值服务',
-        '共享 / 专供两种模式，数据本地卸载',
-        '2018 年起近百个 MEC 商用工程，英特尔联合打造']},
- {op:'联通',layer:'场景层',bdg:'b-sc',tags:['工业'],refs:'证据 28',
-  name:'5G 工业边缘算网一体机',
-  tag:'MWC2023 发布，鼎新杯一等奖',
-  more:['智网创新中心出品，5G 专网 PLUS 系列成果',
-        '算网一体、工业现场边缘部署']},
- {op:'联通',layer:'场景层',bdg:'b-sc',tags:['边缘'],refs:'证据 29 · <span class="weak">微博行业号，强度较弱</span>',
-  name:'5G 边缘智能训推一体机',
-  tag:'单卡 GPU 跑满血 DeepSeek',
-  more:['2025 杭州试点，单卡 GPU 部署满血 DeepSeek',
-        '证据 29 为微博行业号，强度较弱']},
- {op:'联通',layer:'场景层',bdg:'b-sc',tags:['边缘'],refs:'证据 30',
-  name:'AI 边缘一体机',
-  tag:'五大智算产品线之一',
-  more:['2024-07 联通五大智算产品之一']},
+const LAYERS=[
+ {key:'集采层', num:'01', title:'集采层 · 走量', cnt:'1 款',
+  ess:'集团集采、批量中标，单价 1.7–2.8 万/台，拼成本与供货。唯一放量的品类——端侧AI 的对标所在。'},
+ {key:'云品牌层', num:'02', title:'云品牌层 · 走金额', cnt:'11 款',
+  ess:'天翼云 / 移动云 / 联通云与省公司的品牌机，单台数十万到数百万，卖私有化 + MaaS。息壤已证 6 亿签约。'},
+ {key:'场景层', num:'03', title:'场景层 · 长尾', cnt:'8 款',
+  ess:'专业公司与省公司按行业切片：监管、农业、医疗、边缘机柜……碎片化长尾，常被集成。'},
 ];
 
-const grid = document.getElementById('grid');
-DATA.forEach((d,i)=>{
-  const el = document.createElement('article');
-  el.className = 'card' + (d.hot ? ' hot' : '');
-  el.dataset.op = d.op;
-  el.dataset.tags = d.tags.join(',');
-  el.style.setProperty('--d', (i*0.045)+'s');
-  el.tabIndex = 0;
+const ITEMS=[
+ {layer:'集采层',op:'电信',name:'全光组网接入算力一体机（FTTR-B）',tags:['接入网'],refs:'1–4 · 13–15 · 19',
+  fact:'6 批 <b>3.3 万台</b> · 中标 <b>1.74–2.83 万</b>/台（限价 5.37 万） · 二期合同至 <b>2026-12-31</b>'},
+ {layer:'云品牌层',op:'电信',name:'息壤智算一体机（DeepSeek 训推/推理）',tags:['通用智算'],refs:'20–22 · 30',
+  fact:'昇腾 910B 8/16/32 卡 · 签约已达 <b>6 亿</b> · IDC 五项满分'},
+ {layer:'云品牌层',op:'电信',name:'星辰语音大模型一体机',tags:['语音'],refs:'36',
+  fact:'会方言的小模型 · 2024-05 落地<b>小学防霸凌</b>'},
+ {layer:'云品牌层',op:'电信',name:'星辰视觉大模型一体机',tags:['视频'],refs:'37',
+  fact:'面向<b>政法公安</b>的视频图像解析 · 即开即用'},
+ {layer:'云品牌层',op:'电信',name:'天翼混合云一体机 iStack',tags:['云底座'],refs:'38',
+  fact:'2022-05 发布 · 官网下单 · x86/鲲鹏/飞腾/海光'},
+ {layer:'云品牌层',op:'移动',name:'边缘智能小站 EIS',tags:['边缘'],refs:'32',
+  fact:'移动云边缘底座 · <b>3 节点起</b>交付 · 数据不出场'},
+ {layer:'云品牌层',op:'移动',name:'移动云智算一体机（EIS 底座）',tags:['通用智算'],refs:'24–25 · 32',
+  fact:'官方定义：基于 EIS 的"小型专属云" · 信创全栈一云多芯'},
+ {layer:'云品牌层',op:'移动',name:'芯合一体机（山东移动）',tags:['医疗','视频'],refs:'34–35',
+  fact:'省公司自研 · 适配 <b>9 家国产芯片</b> · 签约超 <b>2000 万</b> · 已发采购招标（92 套+736 卡）'},
+ {layer:'云品牌层',op:'移动',name:'九天超融合信创一体机',tags:['云底座'],refs:'26',
+  fact:'计算/存储/AI/网络/安全五维一体'},
+ {layer:'云品牌层',op:'移动',name:'中移国际 DeepSeek 私有化部署',tags:['金融监管'],refs:'25',
+  fact:'亚太金融客户出海首单（2025-02-28）'},
+ {layer:'云品牌层',op:'联通',name:'元景训推 / 推理一体机',tags:['通用智算'],refs:'27',
+  fact:'元景 MaaS 预置 · 2024-07-20 发布'},
+ {layer:'云品牌层',op:'联通',name:'联通云智算一体机',tags:['通用智算'],refs:'31 <span class="weak">· 媒体</span>',
+  fact:'2025-07-21 六新品之一（媒体报道口径）'},
+ {layer:'场景层',op:'电信',name:'星海御风 1 号 · 穿透式监管云一体机',tags:['金融监管'],refs:'23',
+  fact:'翼支付 2026-08 · 整机交付 · 按年订购 · 信创全链路'},
+ {layer:'场景层',op:'电信',name:'星辰数字人 / 智慧医疗行业一体机',tags:['医疗','视频'],refs:'36 <span class="weak">· 媒体</span>',
+  fact:'可对话数字人 · 星辰大模型一体机 · 20+ 行业（媒体口径）'},
+ {layer:'场景层',op:'移动',name:'万象耕耘农业大模型一体机',tags:['农业'],refs:'33',
+  fact:'中移物联出品 · 河南试点近 <b>300 万亩</b>'},
+ {layer:'场景层',op:'联通',name:'元景智能融合网关',tags:['视频'],refs:'27',
+  fact:'最接近"网关+AI"的自有形态 · <b>未见集采放量</b>'},
+ {layer:'场景层',op:'联通',name:'EdgePOD 5G MEC 边缘云一体机',tags:['边缘'],refs:'39',
+  fact:'2020-09 即商用的"即插即用"边缘机柜 · 近百个 MEC 工程'},
+ {layer:'场景层',op:'联通',name:'5G 工业边缘算网一体机',tags:['工业'],refs:'28',
+  fact:'MWC2023 发布 · 鼎新杯一等奖'},
+ {layer:'场景层',op:'联通',name:'5G 边缘智能训推一体机',tags:['边缘'],refs:'29 <span class="weak">· 弱</span>',
+  fact:'单卡 GPU 满血 DeepSeek · 杭州试点（微博行业号，强度较弱）'},
+ {layer:'场景层',op:'联通',name:'AI 边缘一体机',tags:['边缘'],refs:'30',
+  fact:'2024-07 五大智算产品之一'},
+];
+
+const cols = document.getElementById('cols');
+LAYERS.forEach(L=>{
+  const items = ITEMS.filter(i=>i.layer===L.key);
+  const el = document.createElement('section');
+  el.className='col'; el.dataset.layer=L.key;
   el.innerHTML =
-    '<div class="top"><span class="op" data-op="'+d.op+'"><span class="dot"></span></span>'+d.op+
-    '<span class="bdg '+d.bdg+'">'+d.layer+'</span></div>'+
-    '<h3>'+d.name+'</h3>'+
-    '<p class="tag">'+d.tag+'</p>'+
-    '<div class="panel"><ul>'+ d.more.map(m=>'<li>'+m+'</li>').join('') +
-    '</ul><div class="refs"><b>'+d.refs+'</b> · 全文见 lineage.html</div></div>';
-  grid.appendChild(el);
+    '<div class="num">'+L.num+'</div>'+
+    '<h2>'+L.title+'</h2>'+
+    '<span class="cnt">'+L.cnt+'</span>'+
+    '<p class="ess">'+L.ess+'</p>'+
+    '<div class="hint">悬停开盒 ↑</div>'+
+    '<div class="list">'+ items.map(i=>
+      '<div class="it" data-tags="'+i.tags.join(',')+'">'+
+        '<div class="row"><span class="dot op-'+i.op+'"></span>'+i.name+'</div>'+
+        '<div class="fact">'+i.fact+'　<span class="rf">证据 '+i.refs+'</span></div>'+
+      '</div>').join('') +
+    '</div>';
+  cols.appendChild(el);
 });
 
-/* 运营商过滤 */
-document.getElementById('filters').addEventListener('click', e=>{
-  const b = e.target.closest('.fpill'); if(!b) return;
-  document.querySelectorAll('.fpill').forEach(p=>p.classList.toggle('on', p===b));
-  const f = b.dataset.f;
-  document.querySelectorAll('.card').forEach(c=>{
-    c.classList.toggle('hide', f!=='all' && c.dataset.op!==f);
-  });
-});
-
-/* 观点关键词高亮 */
+/* 观点关键词：开盒 + 高亮条目 */
 document.querySelectorAll('.kp').forEach(k=>{
   k.addEventListener('click', ()=>{
     const on = k.classList.toggle('on');
-    if(on) document.querySelectorAll('.kp').forEach(o=>{ if(o!==k) o.classList.remove('on'); });
+    document.querySelectorAll('.kp').forEach(o=>{ if(o!==k) o.classList.remove('on'); });
     const tag = k.dataset.tag;
-    document.querySelectorAll('.card').forEach(c=>{
-      const has = c.dataset.tags.split(',').includes(tag);
-      c.classList.toggle('hl', on && has);
-      c.classList.toggle('dim', on && !has);
+    document.querySelectorAll('.it').forEach(it=>{
+      const has = it.dataset.tags.split(',').includes(tag);
+      it.classList.toggle('hl', on && has);
+      it.classList.toggle('dim', on && !has);
     });
-    if(on){
-      const first = document.querySelector('.card.hl');
-      if(first) first.scrollIntoView({behavior:'smooth', block:'nearest'});
-    }
+    document.querySelectorAll('.col').forEach(c=>{
+      const hit = on && c.querySelector('.it.hl');
+      c.classList.toggle('open', !!hit);
+    });
   });
 });
 
-/* 触屏：点按展开/收起 */
-document.addEventListener('click', e=>{
-  const c = e.target.closest('.card');
-  document.querySelectorAll('.card.open').forEach(o=>{ if(o!==c) o.classList.remove('open'); });
-  if(c) c.classList.toggle('open');
+/* 触屏：点按开盒 / 展开条目 */
+document.getElementById('cols').addEventListener('click', e=>{
+  const it = e.target.closest('.it');
+  if(it){ it.classList.toggle('open'); return; }
+  const col = e.target.closest('.col');
+  document.querySelectorAll('.col.open').forEach(o=>{ if(o!==col && !o.querySelector('.it.open')) o.classList.remove('open'); });
+  if(col) col.classList.toggle('open');
 });
 document.addEventListener('keydown', e=>{
-  if(e.key==='Escape'){ document.querySelectorAll('.card.open,.kp.on').forEach(o=>o.classList.remove('open','on'));
-    document.querySelectorAll('.card').forEach(c=>c.classList.remove('hl','dim')); }
+  if(e.key==='Escape'){
+    document.querySelectorAll('.kp.on,.col.open,.it.open,.it.hl,.it.dim').forEach(o=>o.classList.remove('on','open','hl','dim'));
+  }
 });
 </script>
 </body>
