@@ -3,331 +3,391 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>运营商自研一体机全景谱系 · 2026-11</title>
+<title>运营商自研一体机完整谱系 · 电信/移动/联通</title>
+<meta name="description" content="三家运营商自研一体机全景：集团集采层、云品牌层、场景应用层，20 款产品逐一对应公开出处。">
 <style>
-:root{
-  --paper:#ffffff; --ink:#111118; --sub:#5a5a68; --dim:#9a9aa8;
-  --blue:#1f5eff; --line:#e6e6ec; --panel:#f7f7fa; --bluewash:#eef3ff;
-  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
-}
+:root{--blue:#2456d8;--ink:#1a1d21;--mut:#6b7280;--line:#e3e6ea;--amber:#b5730f}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#efeff4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink)}
-.wrap{max-width:1080px;margin:0 auto;padding:36px 32px 64px}
-sup.ref{font-family:var(--mono);font-size:9px;color:var(--blue);font-weight:700;margin-left:1px;vertical-align:super;line-height:0}
-a{color:var(--blue);text-decoration:none}
-a:hover{text-decoration:underline}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f5f6f8;color:var(--ink);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 28px 56px}
+a{color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(36,86,216,.45)}
+.kicker{font-size:11px;letter-spacing:.18em;color:var(--mut);text-transform:uppercase}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:8px 0 10px}
+.meta{font-size:13px;color:var(--mut)}
+.meta b{color:var(--ink);font-weight:600}
+.meta .sep{margin:0 6px;color:#c3c9d2}
 
-/* header */
-.hd{border-top:4px solid var(--blue);padding-top:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
-.hd .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--blue);margin-bottom:6px}
-.hd h1{font-size:30px;font-weight:800;letter-spacing:-.01em}
-.hd .meta{text-align:right;font-size:11px;color:var(--dim);line-height:1.8;font-family:var(--mono);padding-top:6px;white-space:nowrap}
-.hd .meta b{color:var(--sub);font-weight:600}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.layer{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.layer h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.layer h3 .idx{color:var(--blue);margin-right:6px}
+.layer p{font-size:12.5px;color:#555;line-height:1.65}
 
-/* layer strip */
-.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 8px}
-.layer{border:1px solid var(--line);border-radius:10px;padding:13px 16px;background:#fff}
-.layer.hot{background:var(--bluewash);border-color:#c8d7ff}
-.layer h3{font-size:14px;font-weight:800;margin-bottom:4px}
-.layer.hot h3{color:var(--blue)}
-.layer .pr{font-family:var(--mono);font-size:10px;color:var(--dim);margin-bottom:6px;letter-spacing:.06em}
-.layer p{font-size:11.5px;color:var(--sub);line-height:1.6}
+.sec-h{margin:36px 0 14px;border-left:3px solid var(--blue);padding-left:10px;display:flex;align-items:baseline;gap:10px}
+.sec-h h2{font-size:17px;font-weight:800}
+.sec-h .cnt{font-size:12px;color:var(--mut)}
+.sec-h .note{margin-left:auto;font-size:11.5px;color:var(--mut)}
 
-/* carrier section */
-.carrier{margin-top:34px}
-.carrier-h{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:7px;margin-bottom:14px}
-.carrier-h h2{font-size:19px;font-weight:800}
-.carrier-h .stat{font-size:11px;color:var(--dim);font-family:var(--mono)}
-.carrier-h .occ{margin-left:auto;font-size:10.5px;color:var(--sub);font-weight:650}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fff;display:flex;flex-direction:column;gap:8px}
-.card.hot{border-color:#c8d7ff;background:var(--bluewash)}
-.card .top{display:flex;align-items:center;gap:8px}
-.badge{flex:none;font-family:var(--mono);font-size:9px;letter-spacing:.1em;border-radius:3px;padding:2px 7px;font-weight:700;background:var(--panel);color:var(--sub);border:1px solid var(--line)}
-.badge.l1{background:#e8eeff;color:var(--blue);border-color:#c8d7ff}
-.badge.l3{background:#fff4e5;color:#b25e09;border-color:#ffd9a8}
-.card h3{font-size:14.5px;font-weight:800;line-height:1.35}
-.card .by{font-size:11px;color:var(--dim)}
-.rows{display:flex;flex-direction:column;gap:4px;font-size:11.5px;line-height:1.55}
-.rows .r{display:flex;gap:8px}
-.rows .k{flex:none;width:52px;color:var(--dim);font-family:var(--mono);font-size:10px;padding-top:2px;letter-spacing:.04em}
-.rows .v{color:var(--sub)}
-.rows .v b{color:var(--ink);font-weight:750}
-.rows .v .num{color:var(--blue);font-weight:750;font-variant-numeric:tabular-nums}
-.card .src{font-size:10px;color:var(--dim);font-family:var(--mono);margin-top:auto;padding-top:6px;border-top:1px dashed var(--line)}
-.empty{border:1px dashed var(--line);border-radius:10px;padding:14px 16px;color:var(--dim);font-size:12px;background:var(--panel);display:flex;align-items:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card.hot{border-color:var(--blue);background:#f7faff}
+.card h3{font-size:14.5px;font-weight:700;line-height:1.45}
+.card .cm{font-size:11.5px;color:#8a919c;margin:5px 0 8px}
+.badges{margin-bottom:8px}
+.bdg{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;margin:0 5px 4px 0}
+.b-lc{background:#eef3ff;color:var(--blue)}
+.b-cl{background:#f0eefc;color:#5b4bc4}
+.b-sc{background:#fff4e5;color:var(--amber)}
+.b-os{background:#e8f6f0;color:#1e7f4f}
+.card ul{list-style:none}
+.card li{font-size:12.5px;color:#3c4149;line-height:1.6;padding-left:13px;position:relative;margin:4px 0}
+.card li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--blue);opacity:.55}
+.card .weak{font-size:11.5px;color:var(--amber);margin-top:7px}
 
-/* insight */
-.insight{margin-top:38px;background:var(--ink);color:#fff;border-radius:12px;padding:20px 24px}
-.insight h2{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.insight h2 .dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
-.insight .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.insight .cell h4{font-size:12.5px;font-weight:800;color:#8fb0ff;margin-bottom:4px}
-.insight .cell p{font-size:11.5px;color:#c3cad9;line-height:1.65}
-.insight .cell p b{color:#fff;font-weight:750}
-.insight .concl{margin-top:14px;padding-top:12px;border-top:1px solid #2a2a35;font-size:12.5px;line-height:1.7;color:#e8ebf3}
-.insight .concl b{color:#8fb0ff}
+.take{background:#10151d;color:#d7dce4;border-radius:14px;padding:24px 26px;margin-top:38px}
+.take h3{color:#fff;font-size:16px;font-weight:800;margin-bottom:14px}
+.take .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 22px}
+.take .t{border-top:1px solid rgba(255,255,255,.14);padding-top:10px}
+.take .t b{color:#7ea2ff;font-size:13px}
+.take .t p{font-size:12.5px;line-height:1.7;margin-top:5px;color:#c3c9d2}
+.concl{margin-top:18px;font-size:14.5px;color:#fff;font-weight:700;text-align:center;padding:14px 0 2px}
 
-/* sources */
-.sources{margin-top:34px}
-.sources h2{font-size:16px;font-weight:800;border-bottom:2px solid var(--ink);padding-bottom:7px;margin-bottom:12px}
-.sources ol{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:5px}
-.sources li{counter-increment:s;font-size:11px;color:var(--sub);line-height:1.6;display:flex;gap:9px}
-.sources li::before{content:counter(s,decimal-leading-zero);flex:none;font-family:var(--mono);font-size:9.5px;color:var(--blue);font-weight:700;padding-top:2px}
-.sources li .dt{color:var(--dim);font-family:var(--mono);font-size:10px}
+.srcs{margin-top:34px}
+.srcs h3{font-size:15px;font-weight:800;margin-bottom:10px}
+.srcs ol{padding-left:22px}
+.srcs li{font-size:12px;color:#555;margin:3px 0;line-height:1.55}
+.srcs .u{word-break:break-all}
 
-/* footer */
-.ft{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;font-size:10.5px;color:var(--dim);font-family:var(--mono);line-height:1.7}
-.ft .nav a{margin-right:14px}
-.disc{font-size:10.5px;color:var(--dim);line-height:1.7;margin-top:22px;padding:10px 14px;background:var(--panel);border-radius:8px}
+.notes{margin-top:26px;border-top:1px dashed #d5dae1;padding-top:14px}
+.notes p{font-size:12px;color:#8a919c;margin:5px 0;line-height:1.7}
+.nav{margin-top:26px;font-size:13px;display:flex;gap:18px;flex-wrap:wrap}
+
+@media print{body{background:#fff}.take{background:#1a1d21;-webkit-print-color-adjust:exact}}
+@media(max-width:720px){.layers{grid-template-columns:1fr}.take .grid{grid-template-columns:1fr}h1{font-size:24px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="hd">
-    <div>
-      <div class="tag">CARRIER APPLIANCE LINEAGE · 运营商自研一体机全景谱系</div>
-      <h1>三家运营商的一体机，不止一种</h1>
-    </div>
-    <div class="meta">
-      <div>编制 <b>2026-11-12</b> · 公开检索</div>
-      <div>每条含出处 <b>蓝色角标 ⇢ 文末证据</b></div>
-    </div>
+  <div class="kicker">LINEAGE · OPERATOR-BRANDED APPLIANCES</div>
+  <h1>三家运营商自研一体机 · 完整谱系</h1>
+  <div class="meta">
+    数据窗口 <b>2024-06 → 2026-11</b><span class="sep">·</span>编制 <b>2026-11-12</b><span class="sep">·</span>
+    <b>3</b> 家运营商<span class="sep">·</span><b>20</b> 款自研一体机<span class="sep">·</span><b>39</b> 条公开出处<span class="sep">·</span>
+    内部清单（移动 4 / 电信 8 / 联通 4）已全部核实纳入，另有 5 款公开报道证实的一并收录
   </div>
 
   <div class="layers">
-    <div class="layer hot">
-      <h3>① 集团集采层 · 走量</h3>
-      <div class="pr">单价 1–3 万 · 万台级 · 集采定规格</div>
-      <p>总部统一招标、集采定规格的产品。目前只有电信在做，且正是"接入网+算力"形态——高阶网关的直接对标与投标入口。</p>
+    <div class="layer">
+      <h3><span class="idx">①</span>集团集采层 · 走量</h3>
+      <p>集团集采、批量中标，单价 <b>1.7–2.8 万/台</b>，拼成本与供货。目前仅电信有此品类——这正是高阶网关的直接对标与投标入口。</p>
     </div>
     <div class="layer">
-      <h3>② 云品牌层 · 走金额</h3>
-      <div class="pr">单价数十万–数百万 · 行业直销</div>
-      <p>云公司出品的模型私有化训推一体机，三家全有。电信息壤已披露签约 6 亿。此层产品均不含接入网能力。</p>
+      <h3><span class="idx">②</span>云品牌层 · 走金额</h3>
+      <p>天翼云/移动云/联通云及省公司的品牌一体机，单价 <b>数十万–数百万/台</b>，卖私有化+MaaS。息壤已证 <b>6 亿签约</b>。训推一体机均不含接入网能力。</p>
     </div>
     <div class="layer">
-      <h3>③ 场景应用层 · 长尾</h3>
-      <div class="pr">软硬一体整机 · 按年订购 / 项目制</div>
-      <p>子公司/研究院面向具体场景的产品：监管、工业视觉等。碎片化、单点交付，走"被集成"路线。</p>
+      <h3><span class="idx">③</span>场景应用层 · 长尾</h3>
+      <p>专业公司/省公司按行业切片：监管、农业、医疗、语音、视觉、边缘机柜……碎片化长尾，常被集成，网络底座由别人提供。</p>
     </div>
   </div>
 
-  <!-- ============ 中国电信 ============ -->
-  <div class="carrier">
-    <div class="carrier-h">
-      <h2>中国电信</h2>
-      <span class="stat">CHINA TELECOM</span>
-      <span class="occ">三层全占 · 产品线最全</span>
+  <!-- 中国电信 -->
+  <div class="sec-h">
+    <h2>中国电信</h2><span class="cnt">7 款</span>
+    <span class="note">三层全占：集采走量 + 云品牌走金额 + 场景长尾，最全</span>
+  </div>
+  <div class="cards">
+    <div class="card hot">
+      <h3>全光组网接入算力一体机（FTTR-B 接入算力一体机）</h3>
+      <div class="cm">电信集团 · 集采品类 · 证据 1–4 · 13–15 · 19</div>
+      <div class="badges"><span class="bdg b-lc">集采层 · 走量</span><span class="bdg b-lc">端侧AI 所在层</span></div>
+      <ul>
+        <li>6 批累计 <b>3.3 万台</b>（2024-06 首批 1,000 台 → 2026-05 二期 9,000 台）</li>
+        <li>中标单价 <b>1.74 / 1.98 / 2.83 万/台</b>，最高限价上限 5.37 万/台</li>
+        <li>二期 9,000 台 2.55 亿，合同履行至 <b>2026-12-31</b></li>
+        <li>中标厂商：华为、四川九州、依图、研扬等</li>
+      </ul>
     </div>
-    <div class="cards">
-      <div class="card hot">
-        <div class="top"><span class="badge l1">集采层</span></div>
-        <h3>全光组网接入算力一体机</h3>
-        <div class="by">出品：集团集采（中标：华为 / 四川九州 / 依图 / 研扬）</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2024-06 首批 1,000 台 → 2026-05 二期，<b>累计 6 批 3.3 万台</b></span></div>
-          <div class="r"><span class="k">规格</span><span class="v">FTTR-B 全光组网 + 算力（服务器/AI 功能），ARM / X86 双平台</span></div>
-          <div class="r"><span class="k">价格</span><span class="v">中标单价 <span class="num">1.74 / 1.98 / 2.83 万</span>，最高限价 <span class="num">5.37 万</span>；一期框架至 2026-12-31</span></div>
-        </div>
-        <div class="src">证据 2, 3, 13, 14, 19</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge">云品牌层</span></div>
-        <h3>息壤智算一体机（天翼云）</h3>
-        <div class="by">出品：天翼云 · 昇腾芯片底座</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2024-10-17 首发 → 2025-02-10 DeepSeek 版 → 2026-04 新一代推理一体机（昇腾 800I A2/A3）</span></div>
-          <div class="r"><span class="k">规格</span><span class="v">8 / 16 / 32 卡规格，训推一体 / 推理版本，免独立管理节点架构</span></div>
-          <div class="r"><span class="k">数据</span><span class="v">董事长业绩会披露：签约额已达 <span class="num">6 亿</span>（商机 3000+、签约 500+）；IDC 中国 AI 训推一体机评估 <b>五项满分</b>、第一梯队</span></div>
-        </div>
-        <div class="src">证据 20, 21, 22, 30</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge l3">场景层</span></div>
-        <h3>星海御风 1 号 · 穿透式监管云一体机</h3>
-        <div class="by">出品：翼支付（bestpay.com.cn）</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2026-08 发布</span></div>
-          <div class="r"><span class="k">形态</span><span class="v">软硬一体、整机交付上架即用、按年订购；基础/专业/旗舰三版本；信创全链路国产化</span></div>
-          <div class="r"><span class="k">场景</span><span class="v">国资央企穿透式监管</span></div>
-        </div>
-        <div class="src">证据 23 · 名称以产品页为准（官网新闻标题另有"星辰御风"写法）</div>
-      </div>
+    <div class="card">
+      <h3>息壤智算一体机（DeepSeek 训推 / 推理版）</h3>
+      <div class="cm">天翼云 · 2024-10-17 首发 · 证据 20–22 · 30</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 走金额</span></div>
+      <ul>
+        <li>DeepSeek 版 2025-02 推出：昇腾 910B，<b>8/16/32 卡</b>，提供推理、训推多个版本</li>
+        <li>2026-04 新一代推理一体机（昇腾 800I A2/A3）</li>
+        <li>董事长业绩会披露：签约额已达 <b>6 亿元</b>（商机 3000+、签约 500+）</li>
+        <li>IDC 中国 AI 训推一体机评估 <b>五项满分</b></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>星辰语音大模型一体机</h3>
+      <div class="cm">电信人工智能公司 · 2024-05 · 证据 36</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 场景化AI</span></div>
+      <ul>
+        <li>亿级参数，"会说方言的小模型"，嘈杂环境报警关键词识别</li>
+        <li>2024-05 落地某<b>小学防霸凌</b>场景</li>
+        <li>校园、园区等"人多的地方"是目标场景</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>星辰视觉大模型一体机</h3>
+      <div class="cm">天翼AI开放平台在列 · 2024-09 PT 展 · 证据 37</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 场景化AI</span></div>
+      <ul>
+        <li>视频图像目标 / 动作 / 事件监测，非配合式人脸识别</li>
+        <li>面向<b>政法公安</b>，即开即用</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>星海御风 1 号 · 穿透式监管云一体机（亦作"星辰御风 1 号"）</h3>
+      <div class="cm">翼支付 · 2026-08 · 证据 23</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 监管长尾</span></div>
+      <ul>
+        <li>整机交付、上架即用，订购制按年付费，共三版本</li>
+        <li>信创全链路；翼支付另有星海辰玑·财司核心平台、星海·可信数据空间等产品族</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>星辰数字人 / 智慧医疗行业一体机</h3>
+      <div class="cm">电信 · 数字中国建设成果展 2024-05 · 证据 36 · 媒体口径</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 行业长尾</span></div>
+      <ul>
+        <li>可智能对话的数字人系统（对话 / 形象克隆 / 声音克隆 / 视频生成）</li>
+        <li>星辰大模型一体机：视频接入、解析、管理一体</li>
+        <li>教育、政务、应急等 <b>20+ 行业大模型</b>（媒体报道口径）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>天翼混合云一体机 iStack</h3>
+      <div class="cm">天翼云 · 2022-05 发布 · 证据 38</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 云底座</span></div>
+      <ul>
+        <li>软硬一体超融合：服务器+交换机+机柜一体化交付，<b>3 节点起步</b></li>
+        <li>x86 / 鲲鹏 / 飞腾 / 海光，官网选购下单、约一个月交付</li>
+        <li>面向区县政府、医院、中小企业、边缘节点快速上云</li>
+      </ul>
     </div>
   </div>
 
-  <!-- ============ 中国移动 ============ -->
-  <div class="carrier">
-    <div class="carrier-h">
-      <h2>中国移动</h2>
-      <span class="stat">CHINA MOBILE</span>
-      <span class="occ">仅云品牌层 · 无集采、未见场景自研</span>
+  <!-- 中国移动 -->
+  <div class="sec-h">
+    <h2>中国移动</h2><span class="cnt">6 款</span>
+    <span class="note">云品牌层为主：EIS 底座 → 智算一体机；省公司（山东芯合）与专业公司（中移物联）各自自研</span>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3>边缘智能小站 EIS（Edge Intelligence Site）</h3>
+      <div class="cm">移动云 · 2023-08 首个项目上线 · 证据 32</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 边缘底座</span></div>
+      <ul>
+        <li>边缘超融合算力底座（EHCI），<b>3 节点起</b>交付</li>
+        <li>数据不出场、超低时延，可信云轻量云技术最佳实践</li>
+        <li>IDC 2024H2 边缘云报告：移动云边缘云市场领先（EIS/EIC 体系）</li>
+      </ul>
     </div>
-    <div class="cards">
-      <div class="card">
-        <div class="top"><span class="badge">云品牌层</span></div>
-        <h3>移动云智算一体机 · DeepSeek 版</h3>
-        <div class="by">出品：移动云</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2025-02 推 DeepSeek 版；2025-04-11 云智算大会发布智算一体机</span></div>
-          <div class="r"><span class="k">规格</span><span class="v">国产 CPU/GPU + 国产操作系统，自研推理引擎，技术链路 100% 国产化、信创全栈</span></div>
-        </div>
-        <div class="src">证据 24, 25</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge">云品牌层</span></div>
-        <h3>九天超融合信创一体机</h3>
-        <div class="by">出品：中国移动（九天团队）</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2024-05/06 发布</span></div>
-          <div class="r"><span class="k">规格</span><span class="v">计算 / 存储 / AI / 网络 / 安全<b>五维一体</b>；超融合架构、预装管理软件、模型算法仓选配即点即取、一键迁移快速部署；兼容国产芯片并支持异构算力混合调度</span></div>
-        </div>
-        <div class="src">证据 26</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge">方案型</span></div>
-        <h3>中移国际 DeepSeek 一体机私有化部署</h3>
-        <div class="by">出品：中移国际</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2025-02-28 落地亚太金融客户，海外首单</span></div>
-          <div class="r"><span class="k">形态</span><span class="v">私有化部署方案（非零售产品），面向对数据安全敏感的海外企业</span></div>
-        </div>
-        <div class="src">证据 25</div>
-      </div>
+    <div class="card">
+      <h3>移动云智算一体机（基于 EIS 底座；DeepSeek 版）</h3>
+      <div class="cm">移动云 · 2025-04-11 云智算大会 · 证据 24 · 25</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 走金额</span></div>
+      <ul>
+        <li>官方定义："基于移动云边缘智能小站算力底座打造的<b>小型专属云</b>"</li>
+        <li>DeepSeek 版：国产 CPU/GPU 信创全栈、一云多芯</li>
+        <li>与 EIS 是同一条产品线的 AI 版——底座+AI 应用两层都在移动手里</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>芯合一体机（山东移动）</h3>
+      <div class="cm">山东移动 · MWC上海2026 / 算力大会展出 · 证据 34 · 35</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 省公司自研</span></div>
+      <ul>
+        <li>自研"芯合"异构超融合软件栈：跨架构推理引擎，已适配 <b>9 家国产芯片</b></li>
+        <li>场景机四款：<b>文曲办公 / 华佗医疗 / 秦琼安防 / 包拯审计</b></li>
+        <li>近 20 家行业客户，签约总额超 <b>2,000 万</b>（截至 2026-09）</li>
+        <li>2026-04 设备采购招标：服务器 92 套 + 加速卡 736 张——省公司自研机也走集采供货</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>万象耕耘农业大模型一体机</h3>
+      <div class="cm">中移物联 · 2025-06 AI+物联网发布会 · 证据 33</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 行业长尾</span></div>
+      <ul>
+        <li>九天算力底座，<b>4,000 万+</b>农业知识库</li>
+        <li>植物医院 / 种植仿真 / 风险预警 / 数字农艺师</li>
+        <li>河南试点近 <b>300 万亩</b></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>九天超融合信创一体机</h3>
+      <div class="cm">中国移动 · 2024-05/06 · 证据 26</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 信创底座</span></div>
+      <ul>
+        <li>计算 / 存储 / AI / 网络 / 安全"五维一体"</li>
+        <li>超融合架构、开箱即用，"央企 AI 国家队"阵容</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>中移国际 DeepSeek 一体机私有化部署</h3>
+      <div class="cm">中移国际 · 2025-02-28 · 证据 25</div>
+      <div class="badges"><span class="bdg b-os">出海 · 私有化</span></div>
+      <ul>
+        <li>亚太金融客户出海首单（2025-02-28）</li>
+        <li>中移国际同时经营东南亚/欧洲运营商托管业务</li>
+      </ul>
     </div>
   </div>
 
-  <!-- ============ 中国联通 ============ -->
-  <div class="carrier">
-    <div class="carrier-h">
-      <h2>中国联通</h2>
-      <span class="stat">CHINA UNICOM</span>
-      <span class="occ">云品牌 + 场景两条线 · 无集采</span>
+  <!-- 中国联通 -->
+  <div class="sec-h">
+    <h2>中国联通</h2><span class="cnt">7 款</span>
+    <span class="note">元景品牌打底 + EdgePOD 边缘机柜最早（2020）+ 网关形态最接近高阶网关</span>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3>元景训推一体机 / 元景推理一体机</h3>
+      <div class="cm">联通 · 2024-07-20 元景系列 · 证据 27</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层 · 走金额</span></div>
+      <ul>
+        <li>元景 MaaS 平台预置，GPU 服务器形态</li>
+        <li>与九天、息壤对位——运营商大模型一体机三品牌之一</li>
+      </ul>
     </div>
-    <div class="cards">
-      <div class="card">
-        <div class="top"><span class="badge">云品牌层</span></div>
-        <h3>元景一体机三件套</h3>
-        <div class="by">出品：联通数科 / AI 创新中心</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2024-07-20 合作伙伴大会发布</span></div>
-          <div class="r"><span class="k">组成</span><span class="v">元景训推一体机（预置元景 MaaS 训练版）/ 元景推理一体机（MaaS 推理版或应用版）/ <b>元景智能融合网关</b>（预置元景视频分析平台）——"数据不出门"本地训推</span></div>
-        </div>
-        <div class="src">证据 27 · 智能融合网关是三家自研中最接近"网关+AI"的形态</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge">云品牌层</span></div>
-        <h3>联通云智算一体机</h3>
-        <div class="by">出品：联通云</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2025-07-21 随联通云新产品发布</span></div>
-        </div>
-        <div class="src">证据 31 · 媒体报道</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge l3">场景层</span></div>
-        <h3>5G 工业边缘算网一体机</h3>
-        <div class="by">出品：智网创新中心</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">MWC2023（2023-03）发布</span></div>
-          <div class="r"><span class="k">荣誉</span><span class="v">2023 年"鼎新杯"数字化转型应用大赛一等奖</span></div>
-          <div class="r"><span class="k">形态</span><span class="v">轻量化 UPF、边缘云化网关等即插即用，面向工业互联网</span></div>
-        </div>
-        <div class="src">证据 28</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge l3">场景层</span></div>
-        <h3>5G 边缘智能训推一体机</h3>
-        <div class="by">出品：中国联通（试点）</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2025 年杭州试点</span></div>
-          <div class="r"><span class="k">规格</span><span class="v"><b>单张 GPU 板卡</b>部署满血版 DeepSeek，边缘侧训推</span></div>
-        </div>
-        <div class="src">证据 29 · 微博行业号，强度较弱</div>
-      </div>
-      <div class="card">
-        <div class="top"><span class="badge l3">场景层</span></div>
-        <h3>AI 边缘一体机</h3>
-        <div class="by">出品：中国联通（五大智算产品之一）</div>
-        <div class="rows">
-          <div class="r"><span class="k">时间</span><span class="v">2024-07-19 随 AICC 算力集群、AICP 算力平台、星罗算力调度平台、云 GPU 同批发布</span></div>
-          <div class="r"><span class="k">口径</span><span class="v">作为产品线存在，尚无集团级集采</span></div>
-        </div>
-        <div class="src">证据 12</div>
-      </div>
+    <div class="card">
+      <h3>元景智能融合网关</h3>
+      <div class="cm">联通 · 2024-07-20 元景系列 · 证据 27</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 最接近"网关+AI"</span></div>
+      <ul>
+        <li>预置视频分析平台，算网融合网关形态</li>
+        <li>三家自有品牌中<b>最接近高阶网关形态</b>的产品——但未见集采放量</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>联通云智算一体机</h3>
+      <div class="cm">联通云 · 2025-07-21 · 证据 31 · 媒体报道</div>
+      <div class="badges"><span class="bdg b-cl">云品牌层</span></div>
+      <ul>
+        <li>联通云发布智算一体机等六新产品之一</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>EdgePOD 5G MEC 边缘云一体机（边缘机柜）</h3>
+      <div class="cm">联通 · 2020-09 发布 · 证据 39</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 边缘机柜</span></div>
+      <ul>
+        <li>"即插即用"边缘一体化机柜：网络分流 + 云 IaaS + 增值应用</li>
+        <li>共享 / 专供两种模式，数据本地卸载</li>
+        <li>2018 年起近百个 MEC 商用工程，英特尔联合打造</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>5G 工业边缘算网一体机</h3>
+      <div class="cm">智网创新中心 · MWC2023 · 证据 28</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 工业</span></div>
+      <ul>
+        <li>5G 专网 PLUS 系列成果，2023 鼎新杯一等奖</li>
+        <li>算网一体、工业现场边缘部署</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>5G 边缘智能训推一体机</h3>
+      <div class="cm">联通 · 2025 杭州试点 · 证据 29</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 训推</span></div>
+      <ul>
+        <li>单卡 GPU 部署满血 DeepSeek</li>
+      </ul>
+      <div class="weak">⚠ 证据 29 为微博行业号，强度较弱</div>
+    </div>
+    <div class="card">
+      <h3>AI 边缘一体机</h3>
+      <div class="cm">联通 · 2024-07 五大智算产品之一 · 证据 30</div>
+      <div class="badges"><span class="bdg b-sc">场景层 · 边缘</span></div>
+      <ul>
+        <li>五大智算产品线之一</li>
+      </ul>
     </div>
   </div>
 
-  <!-- ============ 解读 ============ -->
-  <div class="insight">
-    <h2><span class="dot"></span>谱系的三个含义（对端侧AI / 高阶网关）</h2>
+  <!-- 解读 -->
+  <div class="take">
+    <h3>这张谱系对高阶网关（FTTx+算力模块）意味着什么</h3>
     <div class="grid">
-      <div class="cell">
-        <h4>入口一 · 集采层</h4>
-        <p>唯一被"量"验证的形态：电信 <b>3.3 万台</b>、单台 <b>1.7–2.8 万</b>。高阶网关可直接投标，下年度集采即节点（二期至 2026-12-31）。</p>
+      <div class="t">
+        <b>① 客户兼自研方，竞合是常态</b>
+        <p>息壤（天翼云）、智算/EIS（移动云）、元景（联通）、御风（翼支付）——运营商自己就在卖一体机。客户关系是竞合：今天供盒子，明天它自研。报价时别把对方当纯客户。</p>
       </div>
-      <div class="cell">
-        <h4>入口二 · 云品牌层</h4>
-        <p>息壤 / 智算 / 元景的训推一体机<b>均不含接入网能力</b>——做它们的集成底座（连接 + 边缘算力模块），补其空缺而非正面竞争。</p>
+      <div class="t">
+        <b>② 缺口在"接入网×算力"交叉点</b>
+        <p>集采层是电信采购别人的盒子；云品牌层训推一体机均不含接入网；最接近的自有形态是元景智能融合网关，但未见集采放量。交叉点没人占——这是高阶网关的卡位。</p>
       </div>
-      <div class="cell">
-        <h4>入口三 · 场景层</h4>
-        <p>监管（星海御风）、工业视觉（边缘算网）等整机已证明"软硬一体、按年订购"模式成立；高阶网关可作为其网络底座被集成。</p>
+      <div class="t">
+        <b>③ 自研主体不止集团总部</b>
+        <p>省公司（山东芯合，且已发设备采购招标 92 套+736 卡）、专业公司（中移物联万象耕耘）、国际公司（中移国际）都在做一体机。可合作、可投标的入口比集团品牌更多。</p>
+      </div>
+      <div class="t">
+        <b>④ 窗口现在开着</b>
+        <p>电信集采二期合同至 2026-12-31；山东芯合 2026-04 已发采购招标。下年度集采招标文件发布即入场节点——这次的玩家名单里应该有我们。</p>
       </div>
     </div>
-    <div class="concl">关键判断：<b>运营商自身就是自研方</b>——客户关系是竞合。缺口不在任何单一产品里，在"接入网 × 算力"的交叉点上：集采层有接入无算力模块、云品牌层有算力无接入、场景层有应用无连接。</div>
+    <div class="concl">做接入网算力一体机，三层各有入口，跟客户一起卖。</div>
   </div>
 
-  <!-- ============ 证据 ============ -->
-  <div class="sources">
-    <h2>证据清单</h2>
+  <!-- 证据 -->
+  <div class="srcs">
+    <h3>证据清单（39 条，与 data.md 同底稿）</h3>
     <ol>
-      <li><span><b>通信产业报</b>《中国电信启动全光算力一体机集采》<span class="dt">2026-07-15</span>　<a href="https://www.ccidmedia.com/news/scroll/229896.html">ccidmedia.com</a></span></li>
-      <li><span><b>C114</b>《中国电信企业全光组网接入算力一体机设备集采：华为、四川九州等入围》<span class="dt">2025-12-23</span>　<a href="https://www.c114.com.cn/news/126/c-1329623.html">c114.com.cn</a></span></li>
-      <li><span><b>C114 / 搜狐</b>《中国电信企业全光算力一体机（二期）集采：总规模 9000 台》<span class="dt">2026-05-30</span>　<a href="https://www.sohu.com/a/1023456789_260515">sohu.com</a></span></li>
-      <li><span><b>DoNews</b>《中国移动 2026-2027 年 AI 超节点（一阶段）集采：总规模 6208 卡》<span class="dt">2026-04-10</span>　<a href="https://www.donews.com/news/detail/4/4837238.html">donews.com</a></span></li>
-      <li><span><b>C114</b>《中国电信全光算力一体机集采：总规模 3.2 万台》<span class="dt">2026-07-15</span>　<a href="https://www.c114.com.cn/news/126/c-1351129.html">c114.com.cn</a></span></li>
-      <li><span><b>财新</b>《移动超节点扩容 3840 卡中标公示》<span class="dt">2026-08-29</span>　<a href="https://www.caixin.com/2026-08-29/102345678.html">caixin.com</a></span></li>
-      <li><span><b>C114</b>《中国移动推理型服务器集采：总规模 7499 台》<span class="dt">2025-08-19</span>　<a href="https://www.c114.com.cn/news/126/c-1322455.html">c114.com.cn</a></span></li>
-      <li><span><b>新浪财经</b>《中国移动推理服务器第二批中标公示》<span class="dt">2026-01-27</span>　<a href="https://finance.sina.com.cn/roll/2026-01-27/doc-infchaos1234567.shtml">sina.com.cn</a></span></li>
-      <li><span><b>通信产业报</b>《运营商算力报告：2026H1 智算招标 157.58 亿》<span class="dt">2026-07-15</span>　<a href="https://www.ccidmedia.com/news/scroll/229897.html">ccidmedia.com</a></span></li>
-      <li><span><b>通信世界</b>《运营商算力 capex 对比：移动 378 亿 / 电信 255 亿 / 联通超 100 亿》<span class="dt">2026-08</span>　<a href="https://www.cww.net.cn/article/detail/987654">cww.net.cn</a></span></li>
-      <li><span><b>中国联通</b>《中国联通"星格"算力一体机相关发布》　<span class="dt">待核</span></span></li>
-      <li><span><b>国务院国资委</b>《中国联通发布五大智算产品》<span class="dt">2025-04-21</span>　<a href="http://www.sasac.gov.cn/n2588025/n2588119/c33310006/content.html">sasac.gov.cn</a></span></li>
-      <li><span><b>光纤在线</b>《中国电信企业全光组网接入算力一体机集采：限价 1 万/台》<span class="dt">2025-07-17</span>　<a href="https://www.c-fol.net/news/show-98765.html">c-fol.net</a></span></li>
-      <li><span><b>讯石光通讯</b>《中国电信接入算力一体机集采：总规模 5000 台》<span class="dt">2025-10-22</span>　<a href="https://www.iccsz.com/news/776655.html">iccsz.com</a></span></li>
-      <li><span><b>C114</b>《中国电信全光算力一体机集采：总规模 3.2 万台》<span class="dt">2026-07-15</span>　<a href="https://www.c114.com.cn/news/126/c-1351129.html">c114.com.cn</a></span></li>
-      <li><span><b>C114</b>《中国电信算力网关集采》　<a href="https://www.c114.com.cn/news/126/c-1349876.html">c114.com.cn</a></span></li>
-      <li><span><b>中国移动</b>《中国移动 AI 网关产品相关发布》　<span class="dt">企业资料</span></span></li>
-      <li><span><b>上证报 / 东方财富</b>《移动超节点第二批：5 家报价 115.99–117.02 亿》<span class="dt">2026-10-29</span>　<a href="https://finance.eastmoney.com/a/202610293456789012.html">eastmoney.com</a></span></li>
-      <li><span><b>C114</b>《中国电信企业全光组网接入算力一体机集采：总规模 1000 台》<span class="dt">2024-06-28</span>　<a href="https://m.c114.com.cn/w117-1266881.html">c114.com.cn</a></span></li>
-      <li><span><b>财联社</b>《中国电信：息壤 DeepSeek 一体机签约额已达 6 亿元》<span class="dt">2025-03-25</span>　<a href="https://www.cls.cn/detail/1983120">cls.cn</a></span></li>
-      <li><span><b>科创板日报</b>《DeepSeek 一体机密集发布：息壤智算一体机-DeepSeek 版 8/16/32 卡》<span class="dt">2025-02-12</span>　<a href="https://www.cls.cn/detail/1941118">cls.cn</a></span></li>
-      <li><span><b>中国电信官网</b>《五项满分，天翼云息壤智算一体机斩获 IDC 佳绩》<span class="dt">2025-08-07</span>　<a href="https://www.chinatelecom.com.cn/ct/news/yunjisuanjisuanli/154918.html">chinatelecom.com.cn</a></span></li>
-      <li><span><b>翼支付官网</b>《星海御风 1 号 · 穿透式监管云一体机产品页》<span class="dt">2026-08-25</span>　<a href="https://www.bestpay.com.cn/jianguankeji.html">bestpay.com.cn</a></span></li>
-      <li><span><b>新华网</b>《中国移动发布云智算系列产品与智算一体机》<span class="dt">2025-04-12</span>　<a href="https://www.news.cn/info/20250412/8e0a7e9c39e14b5ba7cf842d382baf3f/c.html">news.cn</a></span></li>
-      <li><span><b>新浪财经</b>《2025 一体机元年（附产业链图谱）：移动云 DeepSeek 版、中移国际出海首单》<span class="dt">2025-03-03</span>　<a href="https://finance.sina.com.cn/roll/2025-03-03/doc-ineniywi2543923.shtml">sina.com.cn</a></span></li>
-      <li><span><b>中国移动官网</b>《央企 AI 国家队来峰会啦（AI+九天超融合信创机一体大模型）》<span class="dt">2024-05-23</span>　<a href="https://www.10086.cn/aboutus/news/groupnews/index_detail_49860.html">10086.cn</a></span></li>
-      <li><span><b>经济参考网</b>《中国联通发布元景系列产品（元景训推/推理一体机、智能融合网关）》<span class="dt">2024-07-23</span>　<a href="http://www.jjckb.cn/2024-07/23/c_1310782451.htm">jjckb.cn</a></span></li>
-      <li><span><b>C114 / 5G 通信网</b>《MWC2023：中国联通 5G 工业边缘算网一体机发布》<span class="dt">2023-03-08</span>　<a href="https://5gxt.com/news/v25198.htm">5gxt.com</a></span></li>
-      <li><span><b>微博行业号</b>《中国联通推出 5G 边缘智能训推一体机（杭州试点）》<span class="dt">2025</span>　<a href="https://weibo.com/ttarticle/p/show?id=2309405143403481661850">weibo.com</a> · 强度较弱</span></li>
-      <li><span><b>百度百科</b>《息壤智算推理一体机（2024-10 首发 / 2026-04 新一代）》　<a href="https://baike.baidu.com/item/%E6%81%AF%E5%A3%A4%E6%99%BA%E7%AE%97%E6%8E%A8%E7%90%86%E4%B8%80%E4%BD%93%E6%9C%BA/67702921">baike.baidu.com</a></span></li>
-      <li><span><b>智网易通</b>《联通云发布智算一体机等六新产品》<span class="dt">2025-07-21</span>　<a href="https://zhiyiweek.com/articles/23504">zhiyiweek.com</a> · 媒体报道</span></li>
+      <li>通信产业报《半年超157亿元！运营商智算中心加速"跑"》2026-07-15 <span class="u"><a href="http://m.tvoao.com/news/224680.html">tvoao.com</a></span></li>
+      <li>C114《中国电信企业全光组网接入算力一体机集采：华为等厂商入围》2025-12-23 <span class="u"><a href="https://news.qq.com/rain/a/20251223A02VEK00">qq.com</a></span></li>
+      <li>搜狐《2.5亿元！中国电信9000台算力一体机集采开标》2026-05-30 <span class="u"><a href="https://www.sohu.com/a/1029728708_121124362">sohu.com</a></span></li>
+      <li>DoNews《中国移动2026-2027年AI超节点设备集采落地》2026-04-10 <span class="u"><a href="https://www.donews.com/news/detail/4/6507472.html">donews.com</a></span></li>
+      <li>湖北日报《5亿+！长江计算中标中国移动人工智能超节点设备集中采购项目》2026-04-14 <span class="u"><a href="https://news.hubeidaily.net/pc/c_5384612.html">hubeidaily.net</a></span></li>
+      <li>财新《【周刊提前读】中国AI应用催生海量算力需求》2026-08-29 <span class="u"><a href="https://database.caixin.com/2026-08-29/102479557.html">caixin.com</a></span></li>
+      <li>C114《中国移动加码推理型AI，超50亿大单落地》2025-08-19 <span class="u"><a href="https://www.cww.net.cn/article?id=603166">cww.net.cn</a></span></li>
+      <li>新浪财经《谁是大赢家！中国移动50亿AI推理服务器集采落地》2026-01-27 <span class="u"><a href="https://finance.sina.com.cn/tech/roll/2026-01-27/doc-inhiuixs5472875.shtml">sina.com.cn</a></span></li>
+      <li>证券日报（中国联通 2025 年报业绩说明会报道）2026-03-23 <span class="u"><a href="https://k.sina.com.cn/article_5953189932_162d6782c06703yvg6.html">sina.com.cn</a></span></li>
+      <li>雪球《运营商国家队（算力底座）深度梳理》2026-07-12 <span class="u"><a href="https://xueqiu.com/2187927756/399711967">xueqiu.com</a></span></li>
+      <li>财新《不做算力中心 爱立信押注AI应用重构移动网络需求》2026-06-16 <span class="u"><a href="https://www.caixin.com/2026-06-16/102454689.html">caixin.com</a></span></li>
+      <li>国资委《中国联通构建新型一体化智算基础设施》2025-04-21 <span class="u"><a href="http://www.sasac.gov.cn/n2588025/n2588119/c33310006/content.html">sasac.gov.cn</a></span></li>
+      <li>光纤在线《中国电信将集采3000台企业全光组网接入算力一体机》2025-07-17 <span class="u"><a href="https://www.c-fol.net/m/news/view.php?id=20250717170032">c-fol.net</a></span></li>
+      <li>讯石光通讯《中国电信启动全光组网接入算力一体机集采招标 预计采购5000台》2025-10-22 <span class="u"><a href="http://www.iccsz.com/4g/news.Asp?ID=affe50a50f494bfa9d3d30d9b26aae3e">iccsz.com</a></span></li>
+      <li>光纤在线《中国电信启动 2025-2026 年全光组网接入算力一体机集采 总规模 1.5 万台》2025-11-28 <span class="u"><a href="https://www.c-fol.net/news/1_202511/20251128102858.html">c-fol.net</a></span></li>
+      <li>财新《中国移动设立集团级Token办公室 推进算力商业化》2026-06-30 <span class="u"><a href="https://www.caixin.com/2026-06-30/102459424.html">caixin.com</a></span></li>
+      <li>华为论坛《前5个月：三家花了191.17亿，三种完全不同的打法》2026-10-21 <span class="u"><a href="https://forum.huawei.com/enterprise/cn/zh/thread/blog/6f4c3403-d80f-4f4e-955d-8e5c1707f51a">huawei.com</a></span></li>
+      <li>上证报/东方财富《5家厂商成中国移动AI超节点设备集采中标候选人》2026-10-29 <span class="u"><a href="https://finance.eastmoney.com/a/202610293914048557.html">eastmoney.com</a></span> ；C114《117亿元！中国移动AI超节点设备集采》2026-10-28 <span class="u"><a href="https://m.c114.com.cn/w118-1320000.html">c114.com.cn</a></span></li>
+      <li>C114《中国电信企业全光组网接入算力一体机集采：总规模1000台》2024-06-28 <span class="u"><a href="https://m.c114.com.cn/w117-1266881.html">c114.com.cn</a></span></li>
+      <li>财联社《中国电信：息壤DeepSeek一体机签约额已达6亿元》2025-03-25 <span class="u"><a href="https://www.cls.cn/detail/1983120">cls.cn</a></span></li>
+      <li>科创板日报《DeepSeek一体机密集发布》2025-02-12 <span class="u"><a href="https://www.cls.cn/detail/1941118">cls.cn</a></span></li>
+      <li>中国电信官网《五项满分，天翼云息壤智算一体机斩获佳绩》2025-08-07 <span class="u"><a href="https://www.chinatelecom.com.cn/ct/news/yunjisuanjisuanli/154918.html">chinatelecom.com.cn</a></span></li>
+      <li>翼支付官网《整机交付，上架即用——翼支付"星辰御风1号"穿透式监管云一体机》2026-08-25 <span class="u"><a href="https://www.bestpay.com.cn/news/newsDetail56.html">bestpay.com.cn</a></span>（产品页作"星海御风1号"：<span class="u"><a href="https://www.bestpay.com.cn/jianguankeji.html">bestpay.com.cn</a></span>）</li>
+      <li>新华网《中国移动发布云智算系列产品与智算一体机等多项战略性创新成果》2025-04-12 <span class="u"><a href="https://www.news.cn/info/20250412/8e0a7e9c39e14b5ba7cf842d382baf3f/c.html">news.cn</a></span></li>
+      <li>新浪财经《2025一体机元年（附大模型一体机产业链图谱）》2025-03-03 <span class="u"><a href="https://finance.sina.com.cn/roll/2025-03-03/doc-ineniywi2543923.shtml">sina.com.cn</a></span></li>
+      <li>中国移动官网《央企AI国家队来峰会啦》2024-05-23 <span class="u"><a href="https://www.10086.cn/aboutus/news/groupnews/index_detail_49860.html">10086.cn</a></span></li>
+      <li>经济参考网《中国联通发布元景系列产品》2024-07-23 <span class="u"><a href="http://www.jjckb.cn/2024-07/23/c_1310782451.htm">jjckb.cn</a></span></li>
+      <li>5G通信网《MWC2023：中国联通"5G工业边缘算网一体机"重磅发布》2023-03-08 <span class="u"><a href="https://5gxt.com/news/v25198.htm">5gxt.com</a></span></li>
+      <li>微博《从计算到智算，中国联通推出5G边缘智能训推一体机》2025 <span class="u"><a href="https://weibo.com/ttarticle/p/show?id=2309405143403481661850">weibo.com</a></span>（强度较弱）</li>
+      <li>百度百科《息壤智算推理一体机》 <span class="u"><a href="https://baike.baidu.com/item/息壤智算推理一体机/67702921">baike.baidu.com</a></span></li>
+      <li>智网易通《联通云发布智算一体机等六新产品》2025-07-21 <span class="u"><a href="https://zhiyiweek.com/articles/23504">zhiyiweek.com</a></span>（媒体报道）</li>
+      <li>移动云政企平台 边缘智能小站 EIS 官方产品页 <span class="u"><a href="https://qiye.cmcloud.com/main/zy-EIS.html">qiye.cmcloud.com</a></span> ；IDC 边缘云报道（移动云领跑）2025-07-22 <span class="u"><a href="https://www.citnews.com.cn/news/204469">citnews.com.cn</a></span></li>
+      <li>中国日报《中移物联发布万象耕耘农业大模型一体机》2025-06-24 <span class="u"><a href="https://cnews.chinadaily.com.cn/a/202506/24/WS685a374ca31009d21e5be39b.html">chinadaily.com.cn</a></span></li>
+      <li>中国日报《山东移动芯合一体机亮相2026中国算力大会》2026-09-21 <span class="u"><a href="https://cn.chinadaily.com.cn/a/202609/21/WS6ab0e950e4b09a165c78ba15.html">chinadaily.com.cn</a></span> ；中宏网《芯合一体机亮相2026 MWC上海展》2026-07-01 <span class="u"><a href="https://www.zhonghongwang.com/show-493-465031-1.html">zhonghongwang.com</a></span></li>
+      <li>乙方宝《山东移动2026年芯合一体机设备采购项目招标公告》2026-04-09（服务器92套、加速卡736张）<span class="u"><a href="https://m.yfbzb.com/inviteBid/detail/20260409_588209077.html">yfbzb.com</a></span></li>
+      <li>雷峰网《中国电信星辰大模型通过双备案》2024-05-20 <span class="u"><a href="https://www.leiphone.com/category/industrynews/bikcN67ZEaB7cofU.html">leiphone.com</a></span> ；数字中国建设成果展报道（数字人系统、星辰大模型一体机）2024-05-27 <span class="u"><a href="https://www.sohu.com/a/781876399_121119001">sohu.com</a></span></li>
+      <li>天翼AI开放平台 星辰视觉大模型一体机产品页 <span class="u"><a href="https://www.teleai.com.cn/">teleai.com.cn</a></span> ；新华网《中国电信亮相2024 PT展》2024-09-26 <span class="u"><a href="https://www.xinhuanet.com/info/20240926/d433b02e4b844ed8ad3acaeca75d20b1/c.html">xinhuanet.com</a></span></li>
+      <li>天翼云官网 天翼混合云一体机 iStack 文档 <span class="u"><a href="https://www.ctyun.cn/document/10026801">ctyun.cn</a></span> ；智东西《天翼云推出七大云服务新品》2022-05-17 <span class="u"><a href="https://news.qq.com/rain/a/20220517A092VJ00">qq.com</a></span></li>
+      <li>C114《中国联通重磅推出MEC系列创新应用（5G MEC边缘云一体机 EdgePOD）》2020-09-14 <span class="u"><a href="https://www.c114.com.cn/topic/5795/a1137888.html">c114.com.cn</a></span></li>
     </ol>
   </div>
 
-  <div class="disc">口径说明：本页为产品谱系盘点，集采中标数据与汇报页（report-v2.html）同一底稿（data.md）；"无此类集采 / 未见"指截至 2026-11-12 的公开检索结果，不排除省公司层面有未公开产品。金额、单价口径在各卡内注明，不做跨口径加总。</div>
+  <div class="notes">
+    <p>口径：谱系以公开报道 / 官网产品页为准；"无此类集采 / 未见"为截至 2026-11-12 的公开检索结果。金额、单价按原始报道口径，不跨口径加总。</p>
+    <p>名称："星海御风 1 号 / 星辰御风 1 号"两种写法并存（翼支付官网新闻标题 vs 产品页），本页以产品页为准；xca 内部清单写作"星辰御风 1 号"，同一产品。</p>
+    <p>证据强度：29（微博行业号）、31（智网易通媒体）、36（媒体口径）较弱，卡内已标注。</p>
+    <p>xca 提供内部清单（移动 4 / 电信 8 / 联通 4）已全部核实纳入；另收录公开报道证实但清单外 5 款：九天超融合信创、中移国际私有化、联通云智算一体机、5G 工业边缘算网一体机、5G 边缘智能训推一体机。</p>
+  </div>
 
-  <div class="ft">
-    <div class="nav">
-      <a href="./report-v2.html">⇠ 汇报页 V2</a>
-      <a href="./index.html">数据总览</a>
-      <a href="./data.md">数据底稿 data.md</a>
-      <a href="https://github.com/wangshuang12138-beep/carrier-compute-appliance-2026">GitHub</a>
-    </div>
-    <div>CARRIER-COMPUTE-APPLIANCE-2026 · 2026-11-12</div>
+  <div class="nav">
+    <a href="./report-v2.html">← 汇报页 V2（1280×720 单页）</a>
+    <a href="./index.html">数据可视化汇总</a>
+    <a href="./data.md">data.md 数据底稿</a>
   </div>
 
 </div>
