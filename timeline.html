@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>运营商自研一体机 · 发布时间轴</title>
+<meta name="description" content="三家运营商 20 款自研一体机按发布先后均匀排布的可拖动时间轴：默认只露名字与运营商，悬停节点展开详情。">
+<style>
+:root{
+  --blue:#2456d8;--ink:#1a1d21;--mut:#6b7280;--line:#e3e6ea;--amber:#b5730f;
+  --ax:44%;                       /* 时间轴在舞台中的高度位置 */
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:#fbfbfc;color:var(--ink);-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+
+/* ---------- 头部 ---------- */
+header{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  padding:22px 32px 16px;border-bottom:1px solid var(--line);background:#fff;flex:none;
+}
+.kicker{font-size:11px;letter-spacing:.18em;color:var(--mut);text-transform:uppercase}
+h1{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:5px 0 6px}
+h1 .n{color:var(--blue)}
+.meta{font-size:12.5px;color:var(--mut)}
+.meta b{color:var(--ink);font-weight:600}
+.trend{display:flex;gap:8px;margin-top:9px}
+.trend span{
+  font-size:11.5px;padding:3px 10px;border-radius:20px;background:#f0f4ff;color:var(--blue);font-weight:600;
+}
+.trend span.b{background:#fff4e5;color:var(--amber)}
+.nav{display:flex;gap:16px;font-size:12.5px;flex:none;padding-bottom:2px}
+.nav a{color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(36,86,216,.45)}
+.nav a:hover{border-bottom-style:solid}
+
+/* ---------- 舞台 ---------- */
+.stage{flex:1;position:relative;overflow:hidden;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.stage.grabbing{cursor:grabbing}
+.world{position:absolute;top:0;bottom:0;left:0;will-change:transform}
+
+.axis{
+  position:absolute;left:0;right:0;top:var(--ax);height:2px;
+  background:linear-gradient(90deg,#dfe3e8,#c9cfd7 50%,#dfe3e8);
+  transform-origin:left center;animation:axisIn 1s var(--ease) backwards;
+}
+@keyframes axisIn{from{transform:scaleX(0)}}
+
+/* ---------- 节点 ---------- */
+.node{position:absolute;top:0;bottom:0;width:240px;transform:translateX(-50%);transition:opacity .35s}
+.node .stem{
+  position:absolute;left:50%;bottom:calc(100% - var(--ax));width:2px;margin-left:-1px;height:15px;
+  background:#d8dde3;
+}
+.node .dot{
+  position:absolute;left:50%;bottom:calc(100% - var(--ax) - 6px);width:12px;height:12px;margin-left:-6px;
+  border-radius:50%;background:#fff;border:3px solid var(--cc,#999);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.node .cap{
+  position:absolute;left:50%;transform:translateX(-50%);
+  bottom:calc(100% - var(--ax) + 21px);
+  width:236px;text-align:center;cursor:default;
+}
+.cap .date{
+  display:block;font-size:11px;color:var(--mut);letter-spacing:.06em;margin-bottom:3px;
+  font-variant-numeric:tabular-nums;
+}
+.cap .name{display:block;font-size:13.5px;font-weight:700;line-height:1.4;letter-spacing:-.01em}
+.cap .tag{
+  display:inline-flex;align-items:center;gap:5px;margin-top:5px;
+  font-size:11px;font-weight:600;color:var(--cc);
+}
+.cap .tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cc)}
+
+/* 入场错峰 */
+.node .cap>*{animation:rise .55s var(--ease) backwards;animation-delay:calc(.35s + var(--i)*65ms)}
+.node .stem,.node .dot{animation:rise .5s var(--ease) backwards;animation-delay:calc(.3s + var(--i)*65ms)}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}}
+
+/* ---------- 年份刻度（趋势） ---------- */
+.divider{
+  position:absolute;left:50%;top:calc(var(--ax) - 200px);height:410px;width:1px;
+  background:repeating-linear-gradient(180deg,#e2e6eb 0 5px,transparent 5px 11px);
+}
+.yr{
+  position:absolute;left:50%;transform:translateX(-50%);top:calc(var(--ax) + 16px);
+  font-size:12px;font-weight:800;color:var(--ink);letter-spacing:.05em;
+  font-variant-numeric:tabular-nums;
+}
+.yr small{display:block;text-align:center;font-size:9.5px;font-weight:600;color:#b3bac4;letter-spacing:.1em;margin-top:1px}
+
+/* ---------- 悬停卡片 ---------- */
+.card{
+  position:absolute;left:50%;top:calc(var(--ax) + 46px);width:334px;
+  transform:translateX(-50%) translateY(12px) scale(.92);transform-origin:top center;
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 12px 32px rgba(16,21,29,.10),0 2px 6px rgba(16,21,29,.05);
+  padding:15px 17px 13px;text-align:left;cursor:default;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s var(--ease),transform .38s var(--ease);
+  z-index:5;
+}
+.node:hover .dot,.node.open .dot{transform:scale(1.4);box-shadow:0 0 0 5px color-mix(in srgb,var(--cc) 16%,transparent)}
+.node:hover .card,.node.open .card{opacity:1;transform:translateX(-50%) translateY(0) scale(1);pointer-events:auto}
+.card h4{font-size:14px;font-weight:800;line-height:1.45;letter-spacing:-.01em}
+.card .sub{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:7px 0 9px;font-size:11.5px;color:var(--mut)}
+.card .sub .cname{display:inline-flex;align-items:center;gap:4px;font-weight:700;color:var(--cc)}
+.card .sub .cname::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cc)}
+.bdg{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:600}
+.b-lc{background:#eef3ff;color:var(--blue)}
+.b-cl{background:#f0eefc;color:#5b4bc4}
+.b-sc{background:#fff4e5;color:var(--amber)}
+.b-os{background:#e8f6f0;color:#1e7f4f}
+.card ul{list-style:none}
+.card li{font-size:12.5px;color:#3c4149;line-height:1.62;padding-left:12px;position:relative;margin:3px 0}
+.card li::before{content:"";position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--cc);opacity:.6}
+.card .ev{font-size:11px;color:#8a919c;margin-top:8px;border-top:1px dashed var(--line);padding-top:7px}
+.card .ev .wk{color:var(--amber)}
+.card .hotline{
+  margin-top:8px;font-size:11.5px;font-weight:700;color:var(--blue);
+  background:#f0f4ff;border-radius:7px;padding:6px 9px;
+}
+
+/* 悬停时其余节点降透明度 */
+.stage:has(.node:hover) .node:not(:hover),
+.stage:has(.node.open) .node:not(.open){opacity:.3}
+
+/* ---------- 提示 & 控制 ---------- */
+.hint{
+  position:absolute;left:50%;bottom:20px;transform:translateX(-50%);
+  font-size:12px;color:var(--mut);background:#fff;border:1px solid var(--line);
+  border-radius:100px;padding:7px 16px;pointer-events:none;white-space:nowrap;
+  box-shadow:0 2px 8px rgba(16,21,29,.05);
+  transition:opacity .5s;
+}
+.hint.hide{opacity:0}
+.reset{
+  position:absolute;top:16px;right:20px;font-size:11.5px;color:var(--mut);
+  background:#fff;border:1px solid var(--line);border-radius:7px;padding:5px 12px;cursor:pointer;
+  font-family:inherit;transition:color .2s,border-color .2s;
+}
+.reset:hover{color:var(--blue);border-color:var(--blue)}
+
+.foot{
+  flex:none;display:flex;justify-content:space-between;gap:16px;
+  padding:9px 32px;border-top:1px solid var(--line);background:#fff;
+  font-size:11px;color:#9aa1ab;
+}
+
+@media(max-width:760px){
+  :root{--ax:38%}
+  header{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 20px 12px}
+  h1{font-size:20px}
+  .nav{flex-wrap:wrap}
+  .node{width:200px}
+  .cap .name{font-size:12.5px}
+  .card{width:300px;padding:13px 14px 11px}
+  .divider{top:calc(var(--ax) - 150px);height:360px}
+  .foot{padding:8px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="kicker">TIMELINE · RELEASE DATES</div>
+    <h1>20 款自研一体机 · <span class="n">发布时间轴</span></h1>
+    <div class="meta">数据窗口 <b>2020-09 → 2026-08</b> · 节点按发布先后<b>均匀排布</b>（不按日期比例，间距相等）· <b>拖动</b>查看 · <b>悬停</b>节点展开详情</div>
+    <div class="trend">
+      <span>2020–2023 共 4 款</span>
+      <span class="b">2024–2026 共 16 款 · 占 80%</span>
+    </div>
+  </div>
+  <div class="nav">
+    <a href="./lineage.html">谱系全文 + 39 条证据</a>
+    <a href="./explore.html">交互图鉴</a>
+    <a href="./report-v2.html">汇报页 V2</a>
+    <a href="./data.md">data.md</a>
+  </div>
+</header>
+
+<div class="stage" id="stage">
+  <div class="world" id="world">
+    <div class="axis"></div>
+    <!-- 节点由 JS 渲染 -->
+  </div>
+  <button class="reset" id="reset" type="button">复位</button>
+  <div class="hint" id="hint">← 拖动查看 · 悬停节点展开详情 →</div>
+</div>
+
+<div class="foot">
+  <span>口径：发布/首发/上线时间以公开报道、官网产品页为准，与 lineage.html 谱系同源。</span>
+  <span>设计参考：Dieter Rams「少，却更好」— 默认只露名字与运营商，信息跟着鼠标走。</span>
+</div>
+
+<script>
+/* ================= 数据（与 lineage.html 同源，按发布先后排序） ================= */
+var CM = {
+  dx:{n:"中国电信", col:"#2456d8"},
+  yd:{n:"中国移动", col:"#0e8a5f"},
+  lt:{n:"中国联通", col:"#c2334d"}
+};
+var LAYER = {lc:"集采层 · 走量", cl:"云品牌层", sc:"场景层 · 长尾", os:"出海 · 私有化"};
+
+var DATA = [
+ {d:"2020-09", name:"EdgePOD 边缘云一体机", full:"EdgePOD 5G MEC 边缘云一体机（边缘机柜）", c:"lt", l:"sc",
+  facts:["“即插即用”边缘一体化机柜：网络分流 + 云 IaaS + 增值应用","共享 / 专供两种模式，数据本地卸载","2018 年起近百个 MEC 商用工程，英特尔联合打造"], ev:"证据 39"},
+ {d:"2022-05", name:"天翼混合云一体机 iStack", full:"天翼混合云一体机 iStack", c:"dx", l:"cl",
+  facts:["软硬一体超融合：服务器 + 交换机 + 机柜一体交付，3 节点起步","x86 / 鲲鹏 / 飞腾 / 海光，官网下单、约一个月交付","面向区县政务、医院、中小企业与边缘节点"], ev:"证据 38"},
+ {d:"2023-03", name:"5G 工业边缘算网一体机", full:"5G 工业边缘算网一体机", c:"lt", l:"sc",
+  facts:["5G 专网 PLUS 系列成果，2023 鼎新杯一等奖","算网一体，工业现场边缘部署"], ev:"证据 28"},
+ {d:"2023-08", name:"边缘智能小站 EIS", full:"边缘智能小站 EIS（Edge Intelligence Site）", c:"yd", l:"cl",
+  facts:["边缘超融合算力底座（EHCI），3 节点起交付","数据不出场、超低时延","IDC 2024H2 边缘云报告：移动云市场领先（EIS/EIC 体系）"], ev:"证据 32"},
+ {d:"2024-05", name:"星辰语音大模型一体机", full:"星辰语音大模型一体机", c:"dx", l:"cl",
+  facts:["亿级参数“会说方言的小模型”，嘈杂环境报警关键词识别","2024-05 落地某小学防霸凌场景","校园、园区等“人多的地方”是目标场景"], ev:"证据 36"},
+ {d:"2024-05", name:"九天超融合信创一体机", full:"九天超融合信创一体机", c:"yd", l:"cl",
+  facts:["计算 / 存储 / AI / 网络 / 安全“五维一体”","超融合架构、开箱即用，央企 AI 国家队阵容"], ev:"证据 26"},
+ {d:"2024-05", name:"星辰数字人·智慧医疗", full:"星辰数字人 / 智慧医疗行业一体机", c:"dx", l:"sc", wk:1,
+  facts:["可智能对话的数字人系统：对话 / 形象 / 声音克隆 / 视频生成","星辰大模型一体机：视频接入、解析、管理一体","教育、政务、应急等 20+ 行业大模型（媒体报道口径）"], ev:"证据 36", wkTxt:"媒体口径，强度较弱"},
+ {d:"2024-06", name:"全光组网接入算力一体机", full:"全光组网接入算力一体机（FTTR-B 接入算力一体机）", c:"dx", l:"lc", hot:1,
+  facts:["6 批累计 3.3 万台（2024-06 首批 1,000 台 → 2026-05 二期 9,000 台）","中标单价 1.74 / 1.98 / 2.83 万/台，最高限价 5.37 万","二期 9,000 台 2.55 亿，合同履行至 2026-12-31","中标厂商：华为、四川九州、依图、研扬等"], ev:"证据 1–4 · 13–15 · 19", hotTxt:"端侧 AI 所在层 · 高阶网关直接对标"},
+ {d:"2024-07", name:"元景训推 / 推理一体机", full:"元景训推一体机 / 元景推理一体机", c:"lt", l:"cl",
+  facts:["元景 MaaS 平台预置，GPU 服务器形态","与九天、息壤对位——运营商大模型一体机三品牌之一"], ev:"证据 27"},
+ {d:"2024-07", name:"元景智能融合网关", full:"元景智能融合网关", c:"lt", l:"sc",
+  facts:["预置视频分析平台，算网融合网关形态","三家自有品牌中最接近高阶网关形态——但未见集采放量"], ev:"证据 27"},
+ {d:"2024-07", name:"AI 边缘一体机", full:"AI 边缘一体机", c:"lt", l:"sc",
+  facts:["联通五大智算产品线之一（2024-07 元景系列发布）"], ev:"证据 30"},
+ {d:"2024-09", name:"星辰视觉大模型一体机", full:"星辰视觉大模型一体机", c:"dx", l:"cl",
+  facts:["视频图像目标 / 动作 / 事件监测，非配合式人脸识别","面向政法公安，即开即用"], ev:"证据 37"},
+ {d:"2024-10", name:"息壤智算一体机", full:"息壤智算一体机（DeepSeek 训推 / 推理版）", c:"dx", l:"cl",
+  facts:["DeepSeek 版：昇腾 910B，8 / 16 / 32 卡，推理 / 训推多版本","2026-04 新一代推理一体机（昇腾 800I A2 / A3）","董事长业绩会披露：签约额 6 亿元（商机 3000+、签约 500+）","IDC 中国 AI 训推一体机评估五项满分"], ev:"证据 20–22 · 30"},
+ {d:"2025-02", name:"中移国际 DeepSeek 一体机", full:"中移国际 DeepSeek 一体机私有化部署", c:"yd", l:"os",
+  facts:["亚太金融客户出海首单（2025-02-28）","中移国际同时经营东南亚 / 欧洲运营商托管业务"], ev:"证据 25"},
+ {d:"2025-04", name:"移动云智算一体机", full:"移动云智算一体机（基于 EIS 底座；DeepSeek 版）", c:"yd", l:"cl",
+  facts:["官方定义：“基于边缘智能小站算力底座打造的小型专属云”","DeepSeek 版：国产 CPU / GPU 信创全栈、一云多芯","与 EIS 是同一条产品线的 AI 版——底座 + AI 两层都在移动手里"], ev:"证据 24 · 25"},
+ {d:"2025-06", name:"万象耕耘农业大模型一体机", full:"万象耕耘农业大模型一体机", c:"yd", l:"sc",
+  facts:["九天算力底座，4,000 万+ 农业知识库","植物医院 / 种植仿真 / 风险预警 / 数字农艺师","河南试点近 300 万亩"], ev:"证据 33"},
+ {d:"2025-07", name:"联通云智算一体机", full:"联通云智算一体机", c:"lt", l:"cl", wk:1,
+  facts:["联通云发布智算一体机等六新产品之一"], ev:"证据 31", wkTxt:"媒体报道口径"},
+ {d:"2025", name:"5G 边缘智能训推一体机", full:"5G 边缘智能训推一体机", c:"lt", l:"sc", wk:1,
+  facts:["单卡 GPU 部署满血 DeepSeek（2025 杭州试点）"], ev:"证据 29", wkTxt:"微博行业号，强度较弱"},
+ {d:"2026-06", name:"芯合一体机（山东移动）", full:"芯合一体机（山东移动自研异构超融合栈）", c:"yd", l:"cl",
+  facts:["自研“芯合”异构超融合软件栈，已适配 9 家国产芯片","场景机四款：文曲办公 / 华佗医疗 / 秦琼安防 / 包拯审计","近 20 家行业客户，签约超 2,000 万（截至 2026-09）","2026-04 已发设备采购招标：服务器 92 套 + 加速卡 736 张——省公司自研机也走集采"], ev:"证据 34 · 35"},
+ {d:"2026-08", name:"星海御风 1 号监管云一体机", full:"星海御风 1 号 · 穿透式监管云一体机（亦作“星辰御风 1 号”）", c:"dx", l:"sc",
+  facts:["翼支付出品，整机交付、上架即用，订购制按年付费，共三版本","信创全链路；翼支付另有星海辰玑·财司核心平台等产品族"], ev:"证据 23"}
+];
+
+/* ================= 渲染 ================= */
+var stage = document.getElementById("stage");
+var world = document.getElementById("world");
+var GAP = 240, PAD = 0, worldW = 0;
+
+function yearOf(d){ return parseInt(d.slice(0,4),10); }
+
+function build(){
+  var n = DATA.length;
+  PAD = Math.max((stage.clientWidth - 260) / 2, 48);
+  if(stage.clientWidth < 760) GAP = 200; else GAP = 240;
+  worldW = PAD * 2 + (n - 1) * GAP;
+  world.style.width = worldW + "px";
+
+  var html = "", prevY = null;
+  for(var i = 0; i < n; i++){
+    var it = DATA[i], cm = CM[it.c], x = PAD + i * GAP, y = yearOf(it.d);
+    var showYr = (y !== prevY);
+    prevY = y;
+
+    var facts = "";
+    for(var f = 0; f < it.facts.length; f++) facts += "<li>" + it.facts[f] + "</li>";
+
+    html += ''
+    + '<div class="node' + (it.hot ? " hot" : "") + '" data-i="' + i + '" style="left:' + x + 'px;--i:' + i + ';--cc:' + cm.col + '">'
+    +   (showYr ? '<div class="divider"></div><div class="yr">' + y + '<small>' + (i===0 ? "起点" : "") + '</small></div>' : '')
+    +   '<div class="cap">'
+    +     '<span class="date">' + it.d + '</span>'
+    +     '<span class="name">' + it.name + '</span>'
+    +     '<span class="tag">' + cm.n + '</span>'
+    +   '</div>'
+    +   '<div class="stem"></div>'
+    +   '<div class="dot"></div>'
+    +   '<div class="card">'
+    +     '<h4>' + it.full + '</h4>'
+    +     '<div class="sub"><span class="cname">' + cm.n + '</span><span>' + it.d + '</span><span class="bdg b-' + it.l + '">' + LAYER[it.l] + '</span></div>'
+    +     '<ul>' + facts + '</ul>'
+    +     (it.hotTxt ? '<div class="hotline">' + it.hotTxt + '</div>' : '')
+    +     '<div class="ev">' + it.ev + (it.wkTxt ? ' · <span class="wk">⚠ ' + it.wkTxt + '</span>' : '') + '</div>'
+    +   '</div>'
+    + '</div>';
+  }
+  // 轴+节点
+  world.innerHTML = '<div class="axis"></div>' + html;
+}
+
+build();
+
+/* ================= 拖动 + 惯性 ================= */
+var pan = 0, vel = 0, rafId = null;
+var dragging = false, startX = 0, startPan = 0, lastX = 0, lastT = 0, moved = 0;
+var hint = document.getElementById("hint");
+var hinted = false;
+
+function minPan(){ return Math.min(0, stage.clientWidth - worldW); }
+function clampPan(v){ return Math.max(minPan(), Math.min(0, v)); }
+function apply(){ world.style.transform = "translate3d(" + pan + "px,0,0)"; }
+
+function momentum(){
+  cancelAnimationFrame(rafId);
+  (function tick(){
+    if(Math.abs(vel) < 0.02){ vel = 0; return; }
+    pan = clampPan(pan + vel * 16);
+    vel *= 0.94;
+    if(pan === 0 || pan === minPan()){ vel = 0; }
+    apply();
+    rafId = requestAnimationFrame(tick);
+  })();
+}
+
+stage.addEventListener("pointerdown", function(e){
+  if(e.target.closest(".card") || e.target.closest(".reset")) return;
+  dragging = true; moved = 0;
+  stage.classList.add("grabbing");
+  stage.setPointerCapture(e.pointerId);
+  startX = lastX = e.clientX; startPan = pan; lastT = performance.now();
+  vel = 0; cancelAnimationFrame(rafId);
+  // 点击空白处收起触屏卡片
+  if(!e.target.closest(".node")) closeOpen();
+});
+stage.addEventListener("pointermove", function(e){
+  if(!dragging) return;
+  var dx = e.clientX - startX;
+  moved = Math.max(moved, Math.abs(dx));
+  pan = clampPan(startPan + dx);
+  var now = performance.now(), dt = now - lastT;
+  if(dt > 0){ vel = (e.clientX - lastX) / dt; lastX = e.clientX; lastT = now; }
+  apply();
+  if(moved > 8 && !hinted){ hinted = true; hint.classList.add("hide"); }
+});
+function endDrag(){
+  if(!dragging) return;
+  dragging = false;
+  stage.classList.remove("grabbing");
+  momentum();
+}
+stage.addEventListener("pointerup", endDrag);
+stage.addEventListener("pointercancel", endDrag);
+
+/* 触屏点按：未发生拖动时切换卡片 */
+stage.addEventListener("click", function(e){
+  if(moved > 8) return;
+  var node = e.target.closest(".node");
+  if(!node) return;
+  var was = node.classList.contains("open");
+  closeOpen();
+  if(!was) node.classList.add("open");
+});
+function closeOpen(){
+  var o = world.querySelectorAll(".node.open");
+  for(var i = 0; i < o.length; i++) o[i].classList.remove("open");
+}
+
+/* 滚轮横向平移 */
+stage.addEventListener("wheel", function(e){
+  e.preventDefault();
+  vel = 0; cancelAnimationFrame(rafId);
+  pan = clampPan(pan - (e.deltaY + e.deltaX) * 1.1);
+  apply();
+  if(!hinted){ hinted = true; hint.classList.add("hide"); }
+}, {passive:false});
+
+/* 键盘 */
+document.addEventListener("keydown", function(e){
+  if(e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+  e.preventDefault();
+  vel = 0; cancelAnimationFrame(rafId);
+  pan = clampPan(pan + (e.key === "ArrowRight" ? -1 : 1) * GAP);
+  apply();
+});
+
+/* 复位 */
+document.getElementById("reset").addEventListener("click", function(){
+  vel = 0; cancelAnimationFrame(rafId);
+  pan = clampPan(0); apply();
+});
+
+/* 自适应 */
+window.addEventListener("resize", function(){
+  var ratio = worldW ? pan / worldW : 0;
+  build();
+  pan = clampPan(ratio * worldW);
+  apply();
+});
+
+apply();
+</script>
+</body>
+</html>
